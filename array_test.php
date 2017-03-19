@@ -5,7 +5,7 @@ session_start();
 ?>
 Both array:<br>
 <?php
-$agri_star_001 = new mysqli("127.0.0.1", "reza", "Fooneec9nab5", "agri_star_001");
+include_once"./scripts/agri_star_001_connect.php";
 $country_string1 = "SELECT Country_NameLong, ID_Country FROM Dim_Country";
 $country1 = $agri_star_001->query($country_string1);
 while($country_array1 = $country1->fetch_array()) {

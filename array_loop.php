@@ -1,5 +1,5 @@
 <?php
-$test = new mysqli("127.0.0.1", "reza", "Fooneec9nab5", "test");
+include_once"./scripts/agri_star_001_connect.php";
 $int1 = rand(0, 99999);
 $sql1 = "SELECT `test1`,`test2` FROM test";
 $stmt = $test->query($sql1);
