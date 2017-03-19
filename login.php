@@ -1,13 +1,18 @@
 <?php
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'On');
-	/*setcookie(Test, 
-				$value = Test, 
-				$expire = null, 
-				$path = null, 
-				$domain = null, 
-				$secure = null, 
-				$httponly = null);*/
+	session_start();
+	$session_id1 = session_id();
+	session_destroy();
+	session_start();
+	$session_id2 = session_id();
+	session_destroy();
+	if($session_id1 == $session_id2) {
+		$cookies_state = "2Org-Cows requires cookies, to work properly. By using 2Org-Cows, you agree with the usage of cookies";
+	}
+	else {
+		$cookies_state = "Please enable cookies, to use 2Org-Cows";
+	}
 	include_once "./scripts/logdb_connect.php";
 	if(isset($_SERVER["HTTP_USER_AGENT"])) {
 		$user_agent_1 = $_SERVER["HTTP_USER_AGENT"];
@@ -80,7 +85,9 @@
 				?>
 				</div>
 				<div class="cookies">
-				2Org-Cows requires cookies to work properly. Please enable cookies, if you want to login.
+				<?php
+				echo $cookies_state;
+				?>
 				</div>
 			</div>
 			</div>
