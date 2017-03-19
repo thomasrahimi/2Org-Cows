@@ -1,3 +1,0 @@
-<?php
-$auth = new mysqli("127.0.0.1", "ali", "feemiej3iYia", "user_auth");
-?>
