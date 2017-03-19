@@ -4,6 +4,7 @@ $_SESSION["expire"] = $date + (60*60*24);
 session_name("2Org-Cows");
 session_start();
 include_once "./scripts/check-session.php";
+$user_role = $_SESSION["role"];
 ?>
 <html>
   <head>
@@ -19,10 +20,16 @@ include_once "./scripts/check-session.php";
 		<nav class="dropdown">
 			<span>Menu</span>
 				<nav class="dropdown-content">
+				<?php
+  					if($user_role > 2) {
+  				?>
 				<p><a href="./admin">Admin</a></p>
-				<p><a href="./search">Search</a></p>
 				<p><a href="./measurement">Create Measurement</a></p>
 				<p><a href="./upload">Upload files</a></p>
+				<?php
+				}
+				?>
+				<p><a href="./search">Search</a></p>
 				<p><a href="./cow">Cow</a></p>
 				<p><a href="./user">User</a></p>
 				<p><a href="./logout">Logout</a></p>
@@ -70,12 +77,25 @@ include_once "./scripts/check-session.php";
   				<h3>Navigation</h3>
   				<ul>
   					<li><a href="./search">Search</a></li>
+  					<?php
+  					if($user_role > 2) {
+  					?>
   					<li><a href="./admin">Admin</a></li>
   					<li><a href="./measurement">Create Measurement</a></li>
   					<li><a href="./upload">Upload files</a></li>
+  					<?php
+  					}
+  					?>
   					<li><a href="./cow">Cow</a></li>
   					<li><a href="./user">User</a></li>
   					<li><a href="./help">Help</a></li>
+  					<?php
+  					if($user_role == 4) {
+  					?>
+  					<li><a href="./traffic">Traffic</a></li>
+  					<?php
+  					}
+  					?>
   				</ul>
   			</nav>
   		</div>

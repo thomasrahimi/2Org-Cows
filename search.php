@@ -5,6 +5,7 @@ $date = date("U");
 $_SESSION["expire"] = $date + (60*60*24);
 include_once './scripts/check-session.php';
 include_once "./scripts/agri_star_001_connect.php";
+$user_role = $_SESSION["role"];
 ?>
 <html>
 <head>
@@ -20,9 +21,15 @@ include_once "./scripts/agri_star_001_connect.php";
 		<nav class="dropdown">
 		<span>Menu</span>
 			<nav class="dropdown-content">
+			<?php
+  				if($user_role > 2) {
+  			?>
 			<p><a href="./admin">Admin</a></p>
 			<p><a href="./measurement">Create Measurement</a></p>
 			<p><a href="./upload">Upload files</a></p>
+			<?php
+			}
+			?>
 			<p><a href="./cow">Cow</a></p>
 			<p><a href="./user">User</a></p>
 			<p><a href="./home">Home</a></p>

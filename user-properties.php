@@ -27,10 +27,16 @@ $dim_user_array = $dim_user->fetch_assoc();
 			<nav class="dropdown">
 			<span>Menu</span>
 				<nav class="dropdown-content">
+				<?php
+  					if($user_role > 2) {
+  				?>
 				<p><a href="./admin">Admin</a></p>
-				<p><a href="./search">Search</a></p>
-				<p><a href="./measurement">Create Measurement</a></p>
 				<p><a href="./upload">Upload files</a></p>
+				<p><a href="./measurement">Create Measurement</a></p>
+				<?php
+				}
+				?>
+				<p><a href="./search">Search</a></p>
 				<p><a href="./cow">Cow</a></p>
 				<p><a href="./home">Home</a></p>
 				<p><a href="./logout">Logout</a></p>

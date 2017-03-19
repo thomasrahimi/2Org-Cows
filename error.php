@@ -2,6 +2,7 @@
 include_once './scripts/check-session.php';
 session_name("2Org-Cows");
 session_start(); 
+$user_role = $_SESSION["role"];
 ?>
 <html>
 <head>
@@ -17,11 +18,19 @@ session_start();
 		<div class="dropdown">
 		<span>Menu</span>
 			<div class="dropdown-content">
-			<p><a href="./search">Search</a></p>
+			<?php
+  				if($user_role > 2) {
+  			?>
 			<p><a href="./admin">Admin</a></p>
 			<p><a href="./measurement">Create Measurement</a></p>
 			<p><a href="./upload">Upload files</a></p>
+			<?php
+			}
+			?>
+			<p><a href="./search">Search</a></p>
 			<p><a href="./cow">Cow</a></p>
+			<p><a href="./home">Home</a></p>
+			<p><a href="./user">User</a></p>
 			<p><a href="./logout">Logout</a></p>
 			<p><a href="./help.php">Help</a></p>
 			</div>
