@@ -1,0 +1,376 @@
+.page {
+background-color:white; 
+position:absolute; 
+min-width: 600px; 
+width:100%;
+bottom: 5%;
+display:flex; 
+overflow-x:hidden; 
+padding-top:0; padding-left:0; 
+font-family:"Arial", "Helvetica", sans-serif;
+font-weight:bold;
+font-size: calc(12pt + 0.75vh);
+line-height: 0.8vh;
+word-wrap:break-word;
+top:0px; 
+left:0px;
+line-height:3vh;
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+input[type=text]{ /*defines the appearance of a text input field*/
+border-sizing:border-box;
+border: 2px solid black;
+border-radius: 4px;
+padding-left: 2%;
+background-color: #b7b7b7;
+color: black;
+font-weight: bold;
+font-size: calc(10pt + 0.75vh);
+font-family:"Arial", "Helvetica", sans-serif;
+margin-left: 2%;
+width: 12vw;
+}
+
+input[type=text]:focus {
+	border:2px solid red;
+}
+
+input[type=password]{ /*defines the appearance of a password input field*/
+border-sizing:border-box;
+border: 2px solid black;
+border-radius: 4px;
+padding-left: 2%;
+background-color: #b7b7b7;
+color: black;
+font-weight: bold;
+font-size: calc(10pt + 0.75vh);
+font-family:"Arial", "Helvetica", sans-serif;
+margin-left: 2%;
+width: 12vw;
+}
+
+input[type=password]:focus {
+	border:2px solid red;
+}
+
+input[type=submit]{ /*defines the appearance of a submit input field*/
+background-color: black;
+border-radius: 4px;
+color: white;
+border: none;
+cursor: pointer;
+font-family: "Arial", "Helvetica", sans-serif;
+font-weight: bold;
+font-size: calc(10pt + 0.75vh);
+min-height: 2.5vh;
+min-width: 2.5vw;
+}
+
+button[type=submit]{ /*defines the appearance of a submit input field*/
+background-color: black;
+border-radius: 4px;
+color: white;
+border: none;
+cursor: pointer;
+font-family: "Arial", "Helvetica", sans-serif;
+font-weight: bold;
+font-size: calc(10pt + 0.75vh);
+min-height: 2.5vh;
+min-width: 2.5vw;
+}
+
+button[type=button]{ /*defines the appearance of a submit input field*/
+background-color: black;
+border-radius: 4px;
+color: white;
+border: none;
+cursor: pointer;
+font-family: "Arial", "Helvetica", sans-serif;
+font-weight: bold;
+font-size: calc(10pt + 0.75vh);
+min-height: 2.5vh;
+min-width: 2.5vw;
+}
+
+input[type=email]{
+border-sizing:border-box;
+border: 2px solid black;
+border-radius: 4px;
+padding-left: 2%;
+background-color: #b7b7b7;
+color: black;
+font-weight: bold;
+font-size: calc(10pt + 0.75vh);
+font-family:"Arial", "Helvetica", sans-serif;
+margin-left: 2%;
+width: 12vw;
+}
+
+input[type=email]:focus {
+	border:2px solid red;
+}
+
+input[type=file]{
+border-sizing:border-box;
+border: 2px solid black;
+border-radius: 4px;
+padding-left: 2%;
+background-color: #b7b7b7;
+color: black;
+font-weight: bold;
+font-size: calc(10pt + 0.75vh);
+min-width: 7.5vw;
+min-height: 2.5vh;
+font-family:"Arial", "Helvetica", sans-serif;
+margin-left: 2%;
+}
+
+input[type=date]{
+border-sizing:border-box;
+border: 2px solid black;
+border-radius: 4px;
+padding-left: 2%;
+background-color: #b7b7b7;
+color: black;
+font-weight: bold;
+font-size: calc(10pt + 0.75vh);
+font-family:"Arial", "Helvetica", sans-serif;
+margin-left: 2%;
+width: 12vw;
+}
+
+input[type=date]:focus {
+	border:2px solid red;
+} /*focus changes the input field, if the cursor is in the field*/
+
+select{
+padding-left: 2%;
+padding-right: 4%;
+border-color: black;
+border-radius: 4px;
+color: black;
+background-color: #b7b7b7;
+font-weight: bold;
+font-family:"Arial", "Helvetica", sans-serif;
+margin-left: 2%;
+max-width: 12vw;
+font-size: calc(10pt + 0.75vh);
+cursor: pointer;
+-moz-appearance:none;
+-ie-appearance:none;
+-webkit-appearance:none;
+background-image: url("./Dropdown-arrow.png");
+background-repeat: no-repeat;
+background-position: right;
+}
+
+select:focus {
+	border:2px solid red;
+}
+
+h3{
+color:black;
+font-weight: bold;
+font-family:"Arial", "Helvetica", sans-serif;
+font-size: calc(14pt + 0.8vh);
+}/*defines the shape of h3 headlines*/
+
+table {
+font-family:'Arial', 'Helvetica', sans-serif; 
+font-weight:bold; 
+font-size: calc(12pt + 0.8vh);
+padding-bottom:2vh; 
+margin-top:4%; 
+margin-bottom:4%;
+}
+
+.logo {
+position: absolute;
+right: 5%;
+top: 0%;
+z-index: 10;
+}
+
+.text a {
+word-wrap:break-word;
+color:black;
+}
+
+.header {
+background-color:black;
+position:fixed;
+top:0px;
+left:0px;
+height:3vh;
+font-size: 2.75vh;
+width:100%;
+color:white;
+flex:1;
+margin-top:0px;
+margin-left:auto;
+z-index: 11; /*prohibits overscroll over header*/
+}
+
+.dropdown { /*creates dropdown menu to hover for dropdown menu*/
+position: relative;
+left: 2.5%;
+top: 0.5%;
+width: 15vw;
+display: inline-block;
+cursor: pointer;
+}
+
+.dropdown-content { /*creates dropdown content*/
+display: none;
+position: absolute;
+background-color: grey;
+min-width: 100%;
+box-shadow: 0px;
+padding: 12px 16px;
+z-index: 2;
+}
+
+.dropdown:hover .dropdown-content {
+display: block;
+cursor: pointer;
+}
+
+.center {
+content: "";
+position:absolute;
+width:90vw;
+top:10%;
+left:2%;
+right:5%;
+bottom:4%;
+color:black; 
+height: 15px;
+flex:1;
+margin-top: 20px;
+}
+
+.text { /* for login.php*/
+position:absolute;
+width:100%;
+top:10%;
+left:2%;
+color:black; 
+flex:1;
+}
+
+.login { /* for login.php*/
+content: "";
+position:relative;
+width: 100%;
+right:0%;
+top:5%;
+line-height:3.5vh;
+margin-bottom: 10%;
+}
+
+.notifications { /* for login.php*/
+content: "";
+position:relative;
+left:5%;
+top:50%;
+width:100%;
+}
+
+.cookies { /* for login.php*/
+position:absolute;
+left:5%;
+top:90px;
+width:100%;
+}
+
+.notice1 { /* for login.php*/
+position: absolute;
+left: 5%;
+top: 0;
+width:100%;
+}
+
+.center_1 { /* for create-user.php*/
+content: "";
+position: relative;
+top: 0%;
+left: 5%;
+width: 35vw;
+/*height: 50vh;*/
+float: left;
+margin-bottom: 20%;
+}
+
+.center_2 { /* for create-user.php*/
+content: "";
+position: relative;
+top: 0%;
+right: 10%;
+/*height: 50vh;*/
+width: 35vw;
+float: right;
+margin-bottom: 20%;
+}
+
+.center_3 { /* for create-user.php*/
+content: "";
+position: relative;
+bottom: 10%;
+left: 5%;
+/*height: 30vh;*/
+width: 35vw;
+float: left;
+margin-bottom: 20%;
+}
+
+.center_4 { /* for create-user.php*/
+content: "";
+position: relative;
+bottom: 10%;
+right: 10%;
+/*height: 30vh;*/
+width: 35vw;
+float: right;
+margin-bottom: 20%;
+}
+
+.center_head { /* for search.php, project-files.php,  */ 
+position: relative;
+top: 2.5%;
+left: 2%;
+right: 2%;
+float: left;
+width: 80vw;
+text-align: center;
+margin-bottom: 10%;
+}
+
+.center_bottom { /* for search.php and project-files.php */ 
+position: relative;
+bottom: 15%;
+left: 2.5%;
+width: 90vw;
+float: left;
+height: 30vh;
+margin-top: 10%;
+margin-bottom: 10%;
+}
+
+.footer {
+background-color:black;
+position:fixed;
+bottom:0;
+left:0;
+height:3vh;
+font-size: 2.75vh;
+color:white;
+width:100%;
+flex:1;
+margin-left:auto;
+}
