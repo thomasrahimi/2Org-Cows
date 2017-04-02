@@ -7,6 +7,7 @@ unset($_SESSION["delete_token"]);
 unset($_SESSION["user_token"]);
 unset($_SESSION["group_token"]);
 unset($_SESSION["grant_token"]);
+	if($_SESSION["role"] > 2) {
 	if(isset($_POST["confirm"]) && isset($_POST["user_delete"])) {
 		include_once "auth_connect.php";		
 		include_once "agri_star_001_connect.php";
@@ -26,6 +27,11 @@ unset($_SESSION["grant_token"]);
 		$warning = "Please select user and confirm deletion";
 		header("Location: ../admin?val1=$warning");
 	}
+}
+else {
+	$val1 = "You do not have the rights to delete a user";
+	header("Location:../admin?val1=$val1");
+}
 }
 else {
 	$val1 = "Session terminated due to security concerns. Please check your internet connection";
