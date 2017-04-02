@@ -21,8 +21,10 @@
 	else {
 		$user_agent = "unknown";
 	}
-	$user_ip1 = $_SERVER['REMOTE_ADDR'];
-	$user_ip = $db->real_escape_string($user_ip1);
+	$user_ip_whole = $_SERVER['REMOTE_ADDR'];
+	$user_ip_whole = $db->real_escape_string($user_ip_whole);
+	$user_ip_array = explode(".", $user_ip_whole);
+	$user_ip = "$user_ip_array[0]."."$user_ip_array[1]."."$user_ip_array[2]";
 	$time = date("U"); //date in Unix-Time
 	$sql = "INSERT INTO Log_Table (time, user_agent, user_ip) VALUES (?,?,?)";
 	$stmt = $db->prepare($sql);

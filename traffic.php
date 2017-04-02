@@ -59,7 +59,7 @@ $_SESSION["expire"] = $date + (60*60*24);
 								include_once "./scripts/agri_star_001_connect.php";
 								$time = 60*60*24*7;
 								$week = $date - $time;
-								$sql1 = "SELECT `user_ip` FROM Log_Table WHERE `time` > '$week'";
+								$sql1 = "SELECT `time`, `user_ip` FROM Log_Table WHERE `time` > '$week'";
 								$result = $db->query($sql1);
 								$accesses = $result->num_rows;
 								echo $accesses;
@@ -74,8 +74,9 @@ $_SESSION["expire"] = $date + (60*60*24);
 							<?php
 								while($result_array = $result->fetch_assoc()) {
 									$ip_address = $result_array["user_ip"];
-									$part1 = explode(".", $ip_address);
-									echo nl2br("$part1[0]."."$part1[1]."."$part1[2] \n");
+									$unix_time1 = $result_array["time"];
+									$iso_time1 = gmdate('Y-m-d\ H:i:s', $unix_time1);
+									echo nl2br("$ip_address → $iso_time1 \n");
 								}
 							?>
 						</td>
@@ -91,7 +92,7 @@ $_SESSION["expire"] = $date + (60*60*24);
 						</td>
 						<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
 							<?php
-								$sql2 = "SELECT `ID_User`, `IP` FROM Login_Table WHERE `time` > '$week'";
+								$sql2 = "SELECT `time`, `ID_User`, `IP` FROM Login_Table WHERE `time` > '$week'";
 								$result2 = $db->query($sql2);
 								$logins = $result2->num_rows;
 								echo $logins;
@@ -112,8 +113,9 @@ $_SESSION["expire"] = $date + (60*60*24);
 									$result3 = $agri_star_001->query($sql3);
 									$result_array3 = $result3->fetch_assoc();
 									$username = $result_array3["User_FullName"];
-									$part2 = explode(".", $ip_address2);
-									echo nl2br("$part2[0]."."$part2[1]."."$part2[2] → $username \n");
+									$unix_time2 = $result_array2["time"];
+									$iso_time2 = gmdate('Y-m-d\ H:i:s', $unix_time2);
+									echo nl2br("$ip_address2 → $username ($iso_time2) \n");
 								}
 							?>
 						</td>
