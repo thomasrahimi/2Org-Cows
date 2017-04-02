@@ -109,9 +109,9 @@ if(!empty($_POST["new_institution"]) &&
 			}
 			echo $error;
 			$val2 = "Institution $new_institution successfully created";
+			$agri_star_001->close();
 			header("Location: ../admin?val2=$val2");
 			}
-			$agri_star_001->close();
 			}
 		} else {
 		$val3 = "Please complete the information, required to create an institution";
