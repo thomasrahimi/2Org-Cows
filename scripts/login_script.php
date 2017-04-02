@@ -71,7 +71,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 				$agri_star_001->close();
 				$auth->close();
 				include_once "logdb_connect.php";
-				$log_sql = "INSERT INTO Login_Table (`ID_User`, `time`, `user_agent`, `user_ip`) VALUES ('$user_id', '$start_time', '$user_agent', '$user_ip')";
+				$log_sql = "INSERT INTO Login_Table (`time`, `ID_User`, `user_agent`, `IP`) VALUES ('$start_time', '$user_id', '$user_agent', '$user_ip')";
 				$db->query($log_sql);
 				$db->close();
 					header("Location:../home");
