@@ -121,7 +121,41 @@ $_SESSION["expire"] = $date + (60*60*24);
 						</td>
 					</tr>
 				</table>
-			</div>	
+			</div>
+			<div class="center_4">
+				<h3>Failed logins</h3>
+				<table style="border:1px solid black; border-collapse:collapse;">
+					<tr>
+						<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
+							Amount of failed logins within the last week
+						</td>
+						<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
+							<?php
+								$sql4 = "SELECT * FROM Failed_Login WHERE `time` > '$week'";
+								$failed_login = $db->query($sql4);
+								$fails = $failed_login->num_rows;
+								echo $fails;
+							?>
+						</td>
+					</tr>
+					<tr>
+						<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
+							Data on failed logins
+						</td>
+						<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
+							<?php
+								while($failed_login_array = $failed_login->fetch_assoc()) {
+									$ip_address3 = $failed_login_array["IP"];
+									$login_username = $failed_login_array["username"];
+									$unix_time3 = $failed_login_array["time"];
+									$iso_time3 = gmdate('Y-m-d\ H:i:s', $unix_time3);
+									echo nl2br("$ip_address3 → $login_username ($iso_time3) \n");
+								}
+							?>
+						</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 		<footer class="footer">This page was developed for the 2-Org-Cows project and underlies the <a href="./license" style="color:white;">BSD-license</a></footer>
 	</div>
