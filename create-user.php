@@ -118,12 +118,30 @@ error_reporting(E_ALL);
 				$sql4 = "SELECT `ID_Group`, `Group_Institution`, `Group_Department` FROM Dim_Group WHERE `ID_Group` <> '$group'";
 				$groups = $agri_star_001->query($sql4);
 				while($group_array = $groups->fetch_assoc()) {
+					$institution = $group_array['Group_Institution'];
+					$department = $group_array['Group_Department'];
+					$id_group = $group_array["ID_Group"];
+					$sql5 = "SELECT `access` FROM grants WHERE `giving_group` = '$group' AND `receiving_group` = '$id_group'";
+					$granted = $agri_star_001->query($sql5);
+					$grant_array = $granted->fetch_assoc();
+					$grant = $grant_array["access"];
 			?>
 				<tr>
-					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $group_array['Group_Institution'] ?></td>
-					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $group_array['Group_Department'] ?></td>
+					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $institution ?></td>
+					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $department ?></td>
 					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
-					<input type="checkbox" name="access[]" value="<?= $group_array["ID_Group"] ?>"/></td>
+					<?php
+					if($grant == 1) {
+					?>
+						<input type="checkbox" name="access[]" checked value="<?= $id_group ?>"/>
+					<?php
+					} else {
+					?>
+						<input type="checkbox" name="access[]" value="<?= $id_group ?>"/>
+					<?php
+					}
+					?>
+					</td>
 				</tr>
 			<?php
 				}
