@@ -10,7 +10,6 @@ padding-top:0; padding-left:0;
 font-family:"Arial", "Helvetica", sans-serif;
 font-weight:bold;
 font-size: calc(12pt + 0.75vh);
-line-height: 0.8vh;
 word-wrap:break-word;
 top:0px; 
 left:0px;
@@ -188,6 +187,7 @@ font-size: calc(12pt + 0.8vh);
 padding-bottom:2vh; 
 margin-top:4%; 
 margin-bottom:4%;
+line-height:calc(13px + 1.6vh);
 }
 
 .logo {
@@ -262,6 +262,7 @@ top:10%;
 left:2%;
 color:black; 
 flex:1;
+line-height:calc(13px + 1.6vh);
 }
 
 .login { /* for login.php*/
@@ -304,7 +305,7 @@ left: 5%;
 width: 35vw;
 /*height: 50vh;*/
 float: left;
-margin-bottom: 20%;
+margin-bottom: 10%;
 }
 
 .center_2 { /* for create-user.php*/
@@ -315,7 +316,7 @@ right: 10%;
 /*height: 50vh;*/
 width: 35vw;
 float: right;
-margin-bottom: 20%;
+margin-bottom: 10%;
 }
 
 .center_3 { /* for create-user.php*/
@@ -327,6 +328,7 @@ left: 5%;
 width: 35vw;
 float: left;
 margin-bottom: 20%;
+margin-top: 10%;
 }
 
 .center_4 { /* for create-user.php*/
