@@ -39,7 +39,7 @@ include_once './scripts/check-session_restricted.php';
 	</div>
 	<div class="center">
 		<div class="center_1">
-			<form action="./scripts/upload.php">
+			<form action="./scripts/upload.php"># in this place the use of a python script for direct db handling might be possible
 			<table>
 			<tr>
 				<td style="min-width:10vw; text-align:center;">Please select a file for upload</td>
