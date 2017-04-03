@@ -81,6 +81,15 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 			else {
 				$agri_star_001->close();
 				$auth->close();
+				include_once "logdb_connect.php";
+				$user_agent = $_SERVER["HTTP_USER_AGENT"];
+				$user_ip = $_SERVER["REMOTE_ADDR"];
+				$user_ip_array = explode(".", $user_ip);
+				$user_ip = "$user_ip_array[0]."."$user_ip_array[1]."."$user_ip_array[2]";
+				$time = date("U");
+				$log_sql2 = "INSERT INTO Failed_Login (`time`, `username`, `user_agent`, `IP`) VALUES ('$time', '$username', '$user_agent', '$user_ip')";
+				$db->query($log_sql2);
+				$db->close();
 				$string2 = "Login credentials do not match";
 				header("Location: ../login.php?val2=$string2");
 			}
