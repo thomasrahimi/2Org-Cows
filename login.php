@@ -59,10 +59,10 @@
 			<div class="center_1">
 			<article class="text">
 				You can find further information on the project on this 
-				<a href="http://coreorganicplus.org/research-projects/2-org-cows/">site</a> or 
-				in this <a href="./static/Faerdig_2-Org-Cows.pdf">sheet</a>. The scientific paper, 
+				<a target="_blank" href="http://coreorganicplus.org/research-projects/2-org-cows/">site</a> or 
+				in this <a target="_blank" href="./static/Faerdig_2-Org-Cows.pdf">sheet</a>. The scientific paper, 
 				regarding the database, can be found 
-				<a href="http://orgprints.org/view/projects/2orgcows.html">here</a>.
+				<a target="_blank" href="http://orgprints.org/view/projects/2orgcows.html">here</a>.
 			</article>
 			</div>
 			<div class="center_2">

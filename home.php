@@ -56,8 +56,8 @@ $user_role = $_SESSION["role"];
   				Welcome to the 2-Org-Cows project site. This site has been developed with HTML5, CSS3 and PHP7 
 				technologies and tested with Mozilla Firefox and Google Chrome browsers. 
 				In case some things do not work on your browser, please consider using 
-				<a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a> or 
-				<a href="https://www.google.com/chrome/">Google Chrome</a>.<br />
+				<a target="_blank" href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a> or 
+				<a target="_blank" href="https://www.google.com/chrome/">Google Chrome</a>.<br />
 				In case it really does not work or you wish to have another feature in our program, 
 				feel free to contact our team:<br />
 				<ul>

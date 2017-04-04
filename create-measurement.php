@@ -44,6 +44,7 @@ error_reporting(E_ALL);
 		</div>
 		<div class="center">
 			<div class="center_1">
+			<h3>Create new measurement method</h3>
 				<form method="POST" action="./scripts/measurement_script.php">
 					<table>
 						<tr>
@@ -105,16 +106,19 @@ error_reporting(E_ALL);
 				?>
 			</div>
 			<div class="center_2">
+			<h3>Measurement methods, created by your group</h3>
 				<table style="border:1px solid black; border-collapse:collapse;">
 				<tr>
 					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Measurement Method</th>
-					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Abbreviation</th>
-					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Unit</th>
+					<th style="min-width:2vw; text-align:center; border:1px solid black; border-collapse:collapse;">Abbr.</th>
+					<th style="min-width:2vw; text-align:center; border:1px solid black; border-collapse:collapse;">Unit</th>
 					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Measurement Error</th>
+					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Vendor</th>
+					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Description Link</th>
 				</tr>
 				<?php
 				$group = intval($_SESSION["group"]);
-				$sql = "SELECT `Gage_LongName`,`Gage_ShortName`,`Unit`,`Measurement_Error` FROM Dim_Gage WHERE `Group` = '$group'";
+				$sql = "SELECT `Gage_LongName`,`Gage_ShortName`,`Unit`,`Measurement_Error`, `Vendor`, `Gage_Description_Link` FROM Dim_Gage WHERE `Group` = '$group'";
 				$measurements = $agri_star_001->query($sql);
 				while($measurement_array = $measurements->fetch_assoc()) {
 				?>
@@ -123,6 +127,10 @@ error_reporting(E_ALL);
 					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Gage_ShortName'] ?></td>
 					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Unit'] ?></td>
 					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Measurement_Error'] ?></td>
+					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Vendor'] ?></td>
+					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
+						<a target="_blank" href="<?= $measurement_array['Gage_Description_Link'] ?>" ><?= $measurement_array['Gage_Description_Link'] ?></a>
+					</td>
 				</tr>
 				<?php
 					}
