@@ -25,6 +25,7 @@ if(hash_equals($calc, $_POST["user_token"])) {
 			$fullname = $agri_star_001->real_escape_string($_POST["fullname"]);
 			
 			$username = $agri_star_001->real_escape_string($_POST["username"]);
+			$username = strtolower($username);
 			$check_username_sql ="SELECT `username` FROM auth WHERE `username` = '$username'";//check if username exists already
 			$query_username = $auth->query($check_username_sql);
 			$num_rows_username = $query_username->num_rows;

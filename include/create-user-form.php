@@ -1,7 +1,7 @@
 <form action="./scripts/create_user_script.php" method="POST">
 				<table>
 					<tr><td>Full name of user *</td><td><input type="text" name="fullname" required /></td></tr>
-					<tr><td>Username *</td><td><input type="text" name="username" required /></td></tr>
+					<tr><td>Username *</td><td><input type="text" name="username" required placeholder="name in small letters"/></td></tr>
 					<tr><td>Password *</td><td><input type="password" name="password" required /></tr>
 					<tr><td>Repeat Password *</td><td><input type="password" name="repeat_password" required /></td>
 					<td>
