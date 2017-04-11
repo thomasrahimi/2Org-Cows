@@ -182,12 +182,40 @@ font-size: calc(14pt + 0.8vh);
 
 table {
 font-family:'Arial', 'Helvetica', sans-serif; 
+table-layout: auto;
 font-weight:bold; 
 font-size: calc(12pt + 0.8vh);
 padding-bottom:2vh; 
 margin-top:4%; 
 margin-bottom:4%;
 line-height:calc(13px + 1.6vh);
+}
+
+.tooltip {
+position: relative;
+display: inline-block;
+}
+
+.tooltip .tooltiptext {
+visibility: hidden;
+width: 5vw;
+background-color: black;
+color: white;
+font-size: 1.5vh;
+font-weight: bold;
+text-align: center;
+padding: 5px 0;
+border-radius: 6px;
+z-index: 1;
+top: -5px;
+left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+border: solid;
+content: "";
+z-index: 99;
+visibility: visible;
 }
 
 .logo {
