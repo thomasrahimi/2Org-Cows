@@ -34,6 +34,8 @@ if(hash_equals($calc, $_POST["user_token"])) {
 			$group_id = intval($_POST["group"]);
 			$institution_sql = "SELECT `Group_Institution`, `Group_Department`,`Group_Country` FROM Dim_Group WHERE `ID_Group` = '$group_id'";
 			$institution_result = $agri_star_001->query($institution_sql);
+			$num_rows_group = $institution_result->num_rows; //checks, if the institution exists
+			
 			$institution_array = $institution_result->fetch_assoc();
 			$institution = $institution_array["Group_Institution"];
 			$department = $institution_array["Group_Department"];
@@ -47,6 +49,7 @@ if(hash_equals($calc, $_POST["user_token"])) {
 			$phone_number = $agri_star_001->real_escape_string($_POST["phone_number"]); //string
 			$date = date("U"); //integer
 			$creator_id = $_SESSION["userid"]; //integer, ID_User is set as auto_increment value within mysql database!!
+			$controll_user_role_array = range(1,4,1);
 			
 			if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 				$agri_star_001->close();
@@ -66,17 +69,29 @@ if(hash_equals($calc, $_POST["user_token"])) {
 				$string4 = "username not available";
 				header("Location: ../admin?val4=$string4");
 			}
-			if($user_role == 0) {
+			if($user_role == 0 || in_array($user_role, $controll_user_role_array) == FALSE) { //checks, if the user role is in the allowed area
 				$agri_star_001->close();
 				$auth->close();
 				$string5 = "please select a role for the user";
 				header("Location: ../admin?val5=$string5");
 			}
-			if($_SESSION["role"] < 2) {
+			if($num_rows_group == 0) {
 				$agri_star_001->close();
 				$auth->close();
-				$string6 = "You are not allowed to modify the group";
+				$string6 = "The requested group does not exist";
 				header("Location: ../admin?val6=$string6");
+				}
+			if($_SESSION["role"] == 2 && $user_role > 2) {
+				$agri_star_001->close();
+				$auth->close();
+				$string7 = "You are not allowed to create users with higher permissions";
+				header("Location: ../admin?val7=$string7");
+			}
+			if($_SESSION["role"] == 2 && $group_id != $_SESSION["group"]) {
+				$agri_star_001->close();
+				$auth->close();
+				$string8 = "You are not allowed to modify the group";
+				header("Location: ../admin?val8=$string8");
 			}
 			else {
 			$password = htmlspecialchars($_POST["password"]);

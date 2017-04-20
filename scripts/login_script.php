@@ -51,7 +51,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 				$user_array = $user_result->fetch_assoc();
 				$group = $user_array["ID_Group"];
 				$role = $user_array["User_Role"];
-						
+				
 				$start_time = date("U");
 				$lifetime = 60*60*24;
 				$user_agent = $_SERVER["HTTP_USER_AGENT"];
@@ -91,20 +91,20 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 				$db->query($log_sql2);
 				$db->close();
 				$string2 = "Login credentials do not match";
-				header("Location: ../login.php?val2=$string2");
+				header("Location: ..?val2=$string2");
 			}
 		}
 		}
 	if(empty($_POST["username"]) || empty($_POST["password"])) {
 		$string3 = "Please fill in all required fields";
-		header("Location: ../login.php?val3=$string3");
+		header("Location: ..?val3=$string3");
 	}
 }
 else {
 	$string1 = "Do you have cookies enabled?";
 	unset($_SESSION["token"]);
 	session_destroy();
-	header("Location: ../login.php?val1=$string1");
+	header("Location: ..?val1=$string1");
 }
 }
 ?>

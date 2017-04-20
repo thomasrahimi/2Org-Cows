@@ -10,7 +10,7 @@
 					<tr><td>Password *</td><td><input type="password" name="password" required /></tr>
 					<tr><td>Repeat Password *</td><td><input type="password" name="repeat_password" required /></td>
 					<td>
-						<script type="text/javascript">checkPasswords()</script>
+						<div class="PasswordMessage"><script type="text/javascript">checkPasswords()</script></div>
 					</td>
 					</tr>
 					<tr><td>E-Mail *</td><td><input type="email" name="user_email" required /></td></tr>

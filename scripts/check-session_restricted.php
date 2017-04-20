@@ -17,10 +17,15 @@ $now = date("U");
 		header("Location: ./home?val2=$val2");
 		exit;
 	}
-	elseif($now > $_SESSION["expire"]) {
-		$val3 = "Session has timed out, please login again";
+	elseif($user_role > 4) {
+		$val3 = "User error";
 		session_destroy();
 		header("Location: .?val3=$val3");
+	}
+	elseif($now > $_SESSION["expire"]) {
+		$val4 = "Session has timed out, please login again";
+		session_destroy();
+		header("Location: .?val4=$val4");
 		exit;
 	}
 ?>

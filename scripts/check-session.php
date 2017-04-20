@@ -11,6 +11,11 @@ $now = date("U");
 		header("Location: .?val1=$val1");
 		exit;
 	}
+	elseif($_SESSION["role"] > 4) {
+		$val3 = "User error";
+		session_destroy();
+		header("Location: ./login?val3=$val3");
+	}
 	elseif($now > $_SESSION["expire"]) {
 		$val2 = "Session has timed out, please login again";
 		session_destroy();

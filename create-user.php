@@ -14,8 +14,8 @@ error_reporting(E_ALL);
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type="text/css" href="./static/2Org-Cows.css"/>
 	<link rel="shortcut icon" href="./static/Favicon-2Org-Cows.ico" type="image"/>
-	<!--<script type="text/javascript" src="./static/check-password.js"></script>
-	<script type="text/javascript" src="./static/institution-choice.js"></script>-->
+	<script type="text/javascript" src="./static/check-password.js"></script>
+	<!--<script type="text/javascript" src="./static/institution-choice.js"></script>-->
 	<title>Admin</title>
 </head>
 <body>
