@@ -21,7 +21,7 @@ $user_role = $_SESSION["role"];
 			<span>Menu</span>
 				<nav class="dropdown-content">
 				<?php
-  					if($user_role > 2) {
+  					if($user_role > 1) {
   				?>
 				<p><a href="./admin">Admin</a></p>
 				<p><a href="./measurement">Create Measurement</a></p>
@@ -78,7 +78,7 @@ $user_role = $_SESSION["role"];
   				<ul>
   					<li><a href="./search">Search</a></li>
   					<?php
-  					if($user_role > 2) {
+  					if($user_role > 1) {
   					?>
   					<li><a href="./admin">Admin</a></li>
   					<li><a href="./measurement">Create Measurement</a></li>

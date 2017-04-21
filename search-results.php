@@ -22,7 +22,7 @@ $user_role = $_SESSION["role"];
 		<span>Menu</span>
 			<nav class="dropdown-content">
 			<?php
-  				if($user_role > 2) {
+  				if($user_role > 1) {
   			?>
 			<p><a href="./admin">Admin</a></p>
 			<p><a href="./upload">Upload files</a></p>
