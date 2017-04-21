@@ -14,17 +14,24 @@ if(hash_equals($calc, $_POST["grant_token"])) {
 		$giving_group = intval($_SESSION["group"]);
 		foreach($_POST["access"] as $group){
 			$group = intval($group);
-			$sql1 = "SELECT * FROM grants WHERE `giving_group` = '$giving_group' AND `receiving_group` = '$group'";
-			$stmt1 = $agri_star_001->query($sql1);
-			$num_rows = $stmt1->num_rows;
-			$stmt_array = $stmt1->fetch_assoc();
+			$sql1 = "SELECT * FROM grants WHERE `giving_group` = ? AND `receiving_group` = ?";
+			$stmt1 = $agri_star_001->prepare($sql1);
+			$stmt1->bind_param('ii',$giving_group,$group);
+			$stmt1->execute();
+			$stmt1_result = $stmt1->get_result();
+			$num_rows = $stmt1_result->num_rows;
+			$stmt_array = $stmt1_result->fetch_assoc();
 			$access = intval($stmt_array["access"]);
 			if($num_rows == 0) {
-				$sql2 = "INSERT INTO grants (`giving_group`, `receiving_group`, `access`) VALUES ('$giving_group', '$group', 1)";
-				$agri_star_001->query($sql2);
+				$sql2 = "INSERT INTO grants (`giving_group`, `receiving_group`, `access`) VALUES (?,?, 1)";
+				$stmt2 = $agri_star_001->prepare($sql2);
+				$stmt2->bind_param('ii',$giving_group,$group);
+				$stmt2->execute();
 			} elseif($access != 1) {
-					$sql3 = "UPDATE grants SET `access` = 1 WHERE `giving_group` = '$giving_group' AND `receiving_group` = '$group'";
-					$agri_star_001->query($sql3);
+					$sql3 = "UPDATE grants SET `access` = 1 WHERE `giving_group` = ? AND `receiving_group` = ?";
+					$stmt3 = $agri_star_001->prepare($sql3);
+					$stmt3->bind_param('ii',$giving_group,$group);
+					$stmt3->execute();
 			}
 		}
 		$var1 = "Access successfully updated";
