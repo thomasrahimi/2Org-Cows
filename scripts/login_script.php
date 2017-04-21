@@ -18,9 +18,9 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 		$username_prepare = $auth->prepare($username_sql);
 		$username_prepare->bind_param('s',$username);
 		$username_prepare->execute();
-		$username_prepare->store_result();
+		$username_result = $username_prepare->get_result();
 	
-		$num_rows = $username_prepare->num_rows;
+		$num_rows = $username_result->num_rows;
 		if($num_rows == null) {
 			$agri_star_001->close();
 			$auth->close();
@@ -38,8 +38,11 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 			$password_status = password_verify($password, $password_query);//authenticate against different database, reason: security concerns
 			if($password_status == TRUE) {
 				$username = $auth->real_escape_string($_POST["username"]);
-				$user_id_sql =  "SELECT `ID_User` FROM auth WHERE `username` = '$username'";
-				$user_id_result = $auth->query($user_id_sql);
+				$user_id_sql =  "SELECT `ID_User` FROM auth WHERE `username` = ?";
+				$user_id_query = $auth->prepare($user_id_sql);
+				$user_id_query->bind_param('s',$username);
+				$user_id_query->execute();
+				$user_id_result = $user_id_query->get_result();
 				$user_id_array = $user_id_result->fetch_assoc();
 				$user_id = $user_id_array["ID_User"];
 						

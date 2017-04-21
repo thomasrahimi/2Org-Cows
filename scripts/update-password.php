@@ -8,7 +8,7 @@ if(!empty($_POST["token"])) {
 			!empty($_POST["new_password"]) && 
 			!empty($_POST["verify_password"])) {
 				include_once "auth_connect.php";
-				$id_user = $_SESSION["userid"];
+				$id_user = intval($_SESSION["userid"]);
 				$old_password = $_POST["old_password"];
 				$new_password = $_POST["new_password"];
 				$verify_password = $_POST["verify_password"];
@@ -20,8 +20,10 @@ if(!empty($_POST["token"])) {
 				if($match_old_password == true) {
 					if(strcmp($new_password, $verify_password) == 0) {
 						$password = password_hash($new_password, PASSWORD_DEFAULT, ['cost' => 12]);
-						$sql2 = "UPDATE auth SET `password_hash` = '$password' WHERE `ID_User` = '$id_user'";
-						$auth->query($sql2);
+						$sql2 = "UPDATE auth SET `password_hash` = '$password' WHERE `ID_User` = ?";
+						$update_password = $auth->prepare($sql2);
+						$update_password->bind_param('i', $id_user);
+						$update_password->execute();
 						$success = "Password successfully updated";
 						$auth->close();
 						header("Location:../user?val1=$success");

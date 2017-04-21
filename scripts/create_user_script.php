@@ -26,18 +26,25 @@ if(hash_equals($calc, $_POST["user_token"])) {
 			
 			$username = $agri_star_001->real_escape_string($_POST["username"]);
 			$username = strtolower($username);
-			$check_username_sql ="SELECT `username` FROM auth WHERE `username` = '$username'";//check if username exists already
-			$query_username = $auth->query($check_username_sql);
-			$num_rows_username = $query_username->num_rows;
-			$user_role = $agri_star_001->real_escape_string($_POST["user_role"]);
+			$check_username_sql ="SELECT `username` FROM auth WHERE `username` = ?";//check if username exists already
+			$check_username = $auth->prepare($check_username_sql);
+			$check_username->bind_param('s',$username);
+			$check_username->execute();
+			$username_result = $check_username->get_result();
+			$num_rows_username = $username_result->num_rows;
+			
+			$user_role = intval($agri_star_001->real_escape_string($_POST["user_role"]));
 			
 			$group_id = intval($_POST["group"]);
-			$institution_sql = "SELECT `Group_Institution`, `Group_Department`,`Group_Country` FROM Dim_Group WHERE `ID_Group` = '$group_id'";
-			$institution_result = $agri_star_001->query($institution_sql);
+			$institution_sql = "SELECT `Group_Institution`, `Group_Department`,`Group_Country` FROM Dim_Group WHERE `ID_Group` = ?";
+			$institution = $agri_star_001->prepare($institution_sql);
+			$institution->bind_param('i',$group_id);
+			$institution->execute();
+			$institution_result = $institution->get_result();
 			$num_rows_group = $institution_result->num_rows; //checks, if the institution exists
 			
 			$institution_array = $institution_result->fetch_assoc();
-			$institution = $institution_array["Group_Institution"];
+			$institution_name = $institution_array["Group_Institution"];
 			$department = $institution_array["Group_Department"];
 			$country_value = $institution_array["Group_Country"];
 						
@@ -48,7 +55,7 @@ if(hash_equals($calc, $_POST["user_token"])) {
 			
 			$phone_number = $agri_star_001->real_escape_string($_POST["phone_number"]); //string
 			$date = date("U"); //integer
-			$creator_id = $_SESSION["userid"]; //integer, ID_User is set as auto_increment value within mysql database!!
+			$creator_id = intval($_SESSION["userid"]); //integer, ID_User is set as auto_increment value within mysql database!!
 			$controll_user_role_array = range(1,4,1);
 			
 			if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -130,7 +137,7 @@ if(hash_equals($calc, $_POST["user_token"])) {
 										$group_id,
 										$country,
 										$fullname,
-										$institution,
+										$institution_name,
 										$department,
 										$email,
 										$phone_number,

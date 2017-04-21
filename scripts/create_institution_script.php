@@ -40,13 +40,17 @@ if(!empty($_POST["new_institution"]) &&
 			$post_code = $agri_star_001->real_escape_string($_POST["post-code"]);//string
 			$town = $agri_star_001->real_escape_string($_POST["town"]);//string
 			$country = $agri_star_001->real_escape_string($_POST["country"]);//string
-			$country_sql = "SELECT * FROM Dim_Country WHERE `Country_NameLong` = '$country'";
-			$country_result = $agri_star_001->query($country_sql);
+			
+			$country_sql = "SELECT * FROM Dim_Country WHERE `Country_NameLong` = ?";
+			$country_prepare = $agri_star_001->prepare($country_sql);
+			$country_prepare->bind_param('s',$country);
+			$country_prepare->execute();
+			$country_result = $country_prepare->get_result();
 			$country_rows = $country_result->num_rows;
-			if($country_rows == 0) {
+			if($country_rows == null) {
 				$agri_star_001->close();
 				$var5 = "Country does not exist in database";
-				header("Location: ../admin?val5=$val5");
+				header("Location: ../admin?val5=$var5");
 			} else {
 			$accountable_person = $agri_star_001->real_escape_string($_POST["accountable_person"]);//string
 			$email = $agri_star_001->real_escape_string($_POST["institution_email"]);//string
