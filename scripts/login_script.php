@@ -57,7 +57,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 				
 				$start_time = date("U");
 				$lifetime = 60*60*24;
-				$user_agent = $_SERVER["HTTP_USER_AGENT"];
+				$user_agent = $agri_star_001->real_escape_string($_SERVER["HTTP_USER_AGENT"]);
 				$user_ip = $_SERVER["REMOTE_ADDR"];
 				session_destroy(); //destroy the old login session
 				session_set_cookie_params($lifetime, $path = "/", $domain = "org-cow-breeding.router_of_thomas", $secure = true, $httponly = true);//cookies looses validity after one day
@@ -76,22 +76,27 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 				include_once "logdb_connect.php";
 				$user_ip_array = explode(".", $user_ip);
 				$user_ip = "$user_ip_array[0]."."$user_ip_array[1]."."$user_ip_array[2]";
-				$log_sql = "INSERT INTO Login_Table (`time`, `ID_User`, `user_agent`, `IP`) VALUES ('$start_time', '$user_id', '$user_agent', '$user_ip')";
-				$db->query($log_sql);
+				$log_sql1 = "INSERT INTO Login_Table (`time`, `ID_User`, `user_agent`, `IP`) VALUES (?, ?, ?, ?)";
+				$log_query1 = $db->prepare($log_sql1);
+				$log_query1->bind_param("iiss",$start_time,$user_id,$user_agent,$user_ip);
+				$log_query1->execute();
 				$db->close();
-					header("Location:../home");
+				header("Location:../home");
 				}
 			else {
 				$agri_star_001->close();
 				$auth->close();
 				include_once "logdb_connect.php";
-				$user_agent = $_SERVER["HTTP_USER_AGENT"];
+				$user_agent = $db->real_escape_string($_SERVER["HTTP_USER_AGENT"]);
 				$user_ip = $_SERVER["REMOTE_ADDR"];
 				$user_ip_array = explode(".", $user_ip);
 				$user_ip = "$user_ip_array[0]."."$user_ip_array[1]."."$user_ip_array[2]";
 				$time = date("U");
-				$log_sql2 = "INSERT INTO Failed_Login (`time`, `username`, `user_agent`, `IP`) VALUES ('$time', '$username', '$user_agent', '$user_ip')";
-				$db->query($log_sql2);
+				$log_sql2 = "INSERT INTO Failed_Login (`time`, `username`, `user_agent`, `IP`) VALUES (?, ?, ?, ?)";
+				$log_query2 = $db->prepare($log_sql2);
+				$log_query2->bind_param('isss', $time,$username,$user_agent,$user_ip);
+				$log_query2->execute();
+				$error = $db->error;
 				$db->close();
 				$string2 = "Login credentials do not match";
 				header("Location: ..?val2=$string2");
