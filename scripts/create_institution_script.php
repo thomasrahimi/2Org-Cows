@@ -47,7 +47,7 @@ if(!empty($_POST["new_institution"]) &&
 				$agri_star_001->close();
 				$var5 = "Country does not exist in database";
 				header("Location: ../admin?val5=$val5");
-			}
+			} else {
 			$accountable_person = $agri_star_001->real_escape_string($_POST["accountable_person"]);//string
 			$email = $agri_star_001->real_escape_string($_POST["institution_email"]);//string
 			$phone_number = $agri_star_001->real_escape_string($_POST["phone_number"]);//string
@@ -121,6 +121,7 @@ if(!empty($_POST["new_institution"]) &&
 			header("Location: ../admin?val2=$val2");
 			}
 			}
+		}
 		} else {
 		$val3 = "Please complete the information, required to create an institution";
 		header("Location: ../admin?val3=$val3");
