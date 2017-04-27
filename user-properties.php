@@ -28,7 +28,7 @@ $dim_user_array = $dim_user->fetch_assoc();
 			<span>Menu</span>
 				<nav class="dropdown-content">
 				<?php
-  					if($user_role > 2) {
+  					if($user_role > 1) {
   				?>
 				<p><a href="./admin">Admin</a></p>
 				<p><a href="./upload">Upload files</a></p>

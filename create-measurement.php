@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL);
+#error_reporting(E_ALL);
 	session_name("2Org-Cows");
 	session_start(); 
 	$date = date("U");

@@ -371,8 +371,9 @@ margin-bottom: 20%;
 }
 
 .center_head { /* for search.php, project-files.php,  */ 
+content: "";
 position: relative;
-top: 2.5%;
+top: 0%;
 left: 2%;
 right: 2%;
 float: left;
@@ -382,6 +383,7 @@ margin-bottom: 10%;
 }
 
 .center_bottom { /* for search.php and project-files.php */ 
+content: "";
 position: relative;
 bottom: 15%;
 left: 2.5%;

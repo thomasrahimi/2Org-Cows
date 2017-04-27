@@ -1,7 +1,7 @@
 <?php
 session_name("Login");
 session_start();
-error_reporting(E_ALL);
+#error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 if(!empty($_POST["token"])) {
 if(hash_equals($_SESSION["token"], $_POST["token"])) {

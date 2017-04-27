@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL);
+#error_reporting(E_ALL);
 	$date = date("U");
 	$_SESSION["expire"] = $date + (60*60*24);
 	include_once "./scripts/check-session_restricted.php";

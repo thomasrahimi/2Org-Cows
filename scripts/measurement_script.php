@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL);
+#error_reporting(E_ALL);
 session_name("2Org-Cows");
 session_start(); 
 if(hash_equals($_POST["token"], $_SESSION["token"])) {

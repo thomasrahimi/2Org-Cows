@@ -39,30 +39,32 @@ include_once './scripts/check-session_restricted.php';
 	</div>
 	<div class="center">
 		<div class="center_1">
-			<form action="./scripts/upload.php"># in this place the use of a python script for direct db handling might be possible
+			<form method="POST" enctype="multipart/form-data" action="./scripts/upload.php"> 
 			<table>
 			<tr>
 				<td style="min-width:10vw; text-align:center;">Please select a file for upload</td>
-				<td><input type="file" name="data_files"/></td>
+				<td><input type="file" size="30" name="data_files"/></td>
 			</tr>
 			</table>
 			Choose the file type
-			<table style="font-family:'Arial', 'Helvetica', sans-serif; font-weight:bold; font-size:2.5vh; line-height:3.5vh;border:1px solid black; border-collapse:collapse; padding-bottom:2vh; margin-top:4%; margin-bottom:4%;">
+			<table style="font-family:'Arial', 'Helvetica', 
+			sans-serif; font-weight:bold; font-size:2.5vh; line-height:3.5vh;border:1px solid black; 
+			border-collapse:collapse; padding-bottom:2vh; margin-top:4%; margin-bottom:4%;">
 			<tr>
 				<td style="min-width:10vw; text-align:center; border:1px solid black; border-collapse:collapse;">ADIS file</td>
 				<td style="min-width:10vw; text-align:center; border:1px solid black; border-collapse:collapse;">csv file</td>
 				<td style="min-width:10vw; text-align:center; border:1px solid black; border-collapse:collapse;">Excel file</td>
 			</tr>
 			<tr>
-				<td style="text-align:center; border:1px solid black; border-collapse:collapse;"><input type="radio" name="file_type" value="1" /></td>
-				<td style="text-align:center; border:1px solid black; border-collapse:collapse;"><input type="radio" name="file_type" value="2" /></td>
-				<td style="text-align:center; border:1px solid black; border-collapse:collapse;"><input type="radio" name="file_type" value="3" /></td>
+				<td style="text-align:center; border:1px solid black; border-collapse:collapse;"><input type="radio" name="file_type" value="adis" /></td>
+				<td style="text-align:center; border:1px solid black; border-collapse:collapse;"><input type="radio" name="file_type" value="csv" /></td>
+				<td style="text-align:center; border:1px solid black; border-collapse:collapse;"><input type="radio" name="file_type" value="excel" /></td>
 			</tr>
 			</table>
 			<?php //this part is for CSRF protection
-				$token = uniqid();
-				$_SESSION["token"] = $token;
+				$_SESSION["upload_token"] = bin2hex(random_bytes(32));
 			?>
+			<input type="hidden" name="upload_token" value="<?= $_SESSION["upload_token"] ?>" />
 			<input type="submit" name="upload" value="upload file" formaction="./scripts/upload.php"/>
 			</form>
 		</div>

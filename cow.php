@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL);
+#error_reporting(E_ALL);
 	session_name("2Org-Cows");
 	session_start(); 
 	$date = date("U");
@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 	include_once "./scripts/check-session.php";
 	include_once "./scripts/agri_star_001_connect.php";
 	$user_role = $_SESSION["role"];
+	$group = $_SESSION["role"];
 ?>
 <html>
 <head>
@@ -50,16 +51,30 @@ error_reporting(E_ALL);
 			</a>
 		</div>
 		<div class="center_search">
-			<div class="center_head">
-			<div style="text-align:left;">Select the cow:<br>
-			<table>
-				<tr>
-					<td style="text-align:center"><input type="image" value="submit" src="./static/Arrow-left.png" alt="Previous Cow" name="previous_cow" width="25%" /></td>
-					<td style="text-align:center"><input type="text" name="cow_search" /></td>
-					<td style="text-align:center"><input type="image" value="submit" src="./static/Arrow-right.png" alt="Next Cow" name="next_cow" width="25%" /></td>
-				</tr>
-				<tr><td></td><td style="text-align:right;"><button type="submit" value="Search Cow" name="search_cow">Search Cow</button></td></tr>
-			</table>
+			<div>
+				<h3>Select a farm</h3>
+				<table>
+					<tr>
+						<td>Please choose a farm</td>
+						<td>
+							<select name="farm">
+								<?php
+								$sql1 = "SELECT `ID_Farm`,`Farm_NameLong` FROM Dim_Farm";
+								?>
+							</select></td>
+					</tr>
+				</table>
+			</div>
+			<div class="center_2">
+				<h3 style="text-align:left;">Select the cow:</h3>
+				<table>
+					<tr>
+						<td style="text-align:center"><input type="image" value="submit" src="./static/Arrow-left.png" alt="Previous Cow" name="previous_cow" width="25%" /></td>
+						<td style="text-align:center"><input type="text" name="cow_search" /></td>
+						<td style="text-align:center"><input type="image" value="submit" src="./static/Arrow-right.png" alt="Next Cow" name="next_cow" width="25%" /></td>
+					</tr>
+					<tr><td></td><td style="text-align:right;"><button type="submit" value="Search Cow" name="search_cow">Search Cow</button></td></tr>
+				</table>
 			</div>
 			</div>
 		</div>
