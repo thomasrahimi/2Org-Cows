@@ -1,5 +1,4 @@
 <?php
-$agri_star_001 = new mysqli("127.0.0.1", "reza", "Fooneec9nab5", "agri_star_001");
 session_name("2Org-Cows");
 session_start(); 
 $calc = hash_hmac('sha256', 'search', $_SESSION["search_token"]);
@@ -8,6 +7,7 @@ unset($_SESSION["search_token"]);
 $date = date("U");
 $_SESSION["expire"] = $date + (60*60*24);
 if(isset($_POST["search-criteria"]) && isset($_POST["operator"]) && isset($_POST["condition"])) {
+	include_once "agri_star_001_connect.php";
 	$search_criteria = $_POST["search-criteria"];//int
 	$search_location = $_POST["search-location"];//int
 	$operator = $_POST["operator"];//int
