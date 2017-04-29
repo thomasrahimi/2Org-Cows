@@ -51,7 +51,7 @@
 			</a>
 		</div>
 		<div class="center_search">
-			<div>
+				<div class="center_1">
 				<h3>Select a farm</h3>
 				<table>
 					<tr>
@@ -64,7 +64,7 @@
 							</select></td>
 					</tr>
 				</table>
-			</div>
+				</div>
 			<div class="center_2">
 				<h3 style="text-align:left;">Select the cow:</h3>
 				<table>
