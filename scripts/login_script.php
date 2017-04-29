@@ -10,6 +10,8 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 		!empty($_POST["username"])) {
 		include_once "auth_connect.php";		
 		include_once "agri_star_001_connect.php";
+		include_once "logdb_connect.php";
+		
 		$username = htmlspecialchars($_POST["username"]);
 		$username = $auth->real_escape_string($username);
 		$password = htmlspecialchars($_POST["password"]);
@@ -27,6 +29,23 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 			$string1 ="No user found matching your username";
 			header("Location: ../login.php?val1=$string1");
 		}
+		
+		$time = date("U");
+		$check_time = $time - 10*60;
+		$sql1 = "SELECT * FROM Failed_Login WHERE `username` = ? AND `time` > ?";
+		$stmt1 = $db->prepare($sql1);
+		$stmt1->bind_param('si',$username,$check_time);
+		$stmt1->execute();
+		$result1 = $stmt1->get_result();
+		$attempts = $result1->num_rows;
+		if($attempts > 3) {
+			$agri_star_001->close();
+			$auth->close();
+			$db->close();
+			$string4 = "Your account has been blocked to login, please try it later";
+			header("Location:..?val4=$string4");
+		}
+		
 		else {
 			$password_sql = "SELECT `password_hash` FROM auth WHERE username = ?";
 			$password_prepare = $auth->prepare($password_sql);

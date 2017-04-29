@@ -63,8 +63,8 @@ $user_role = $_SESSION["role"];
 				<ul>
 				<li>Boris Kulig: <a href="mailto:bkulig@uni-kassel.de">bkulig@uni-kassel.de</a>, 
 				project coordinator, responsible for database design</li>
-				<li>Thomas Rahimi: <a href="mailto:thomas.rahimi@openmailbox.org">
-				thomas.rahimi@openmailbox.org</a>, responsible for interface development</li>
+				<li>Thomas Rahimi: <a href="mailto:thomas.rahimi@mailbox.org">
+				thomas.rahimi@mailbox.org</a>, responsible for interface development</li>
 				</ul>
 				This page is, up till now, work in progress, so don't be astonished, if things are still changing.
 				I hope your work with this page is successful and in case there are any problems, do not hesitate
