@@ -1,6 +1,13 @@
 <?php
 	#error_reporting(E_ALL);
 	#ini_set('display_errors', 'On');
+	$active_session = session_status();
+	if(isset($_SESSION["userid"])) {
+		session_name("2Org-Cows");
+		session_start();
+		header("Location:./home");
+	}
+	else {
 	session_start();
 	$session_id1 = session_id();
 	session_destroy();
@@ -8,7 +15,8 @@
 	$session_id2 = session_id();
 	session_destroy();
 	if($session_id1 == $session_id2) {
-		$cookies_state = "2Org-Cows requires cookies, to work properly. By using 2Org-Cows, you agree with the usage of cookies";
+		$cookies_state = "2Org-Cows requires cookies, to work properly. By using 2Org-Cows, you agree with 
+		the usage of cookies";
 	}
 	else {
 		$cookies_state = "Please enable cookies, to use 2Org-Cows";
@@ -72,9 +80,12 @@
 					<tr><td>Username</td><td><input type="text" name="username" required autofocus /></td></tr>
 					<tr><td>Password</td><td><input type="password" name="password" required /></td></tr>
 					<?php
-					$_SESSION["token"] = bin2hex(random_bytes(32));
+					if(empty($_SESSION["token"])) {
+						$_SESSION["token"] = bin2hex(random_bytes(32));
+					}
+					$token = $_SESSION["token"]
 					?>
-					<input type="hidden" name="token" value="<?= $_SESSION["token"] ?>" />
+					<input type="hidden" name="token" value="<?= $token ?>" />
 					<tr><td><input type="submit" name="login" value="login" formaction="./scripts/login_script.php"/></td></tr>
 					</table>
 				</form>
@@ -101,3 +112,6 @@
 </div>
 </body>
 </html>
+<?php
+}
+?>
