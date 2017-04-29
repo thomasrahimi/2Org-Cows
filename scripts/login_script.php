@@ -29,7 +29,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 			$string1 ="No user found matching your username";
 			header("Location: ../login.php?val1=$string1");
 		}
-		
+		else{
 		$time = date("U");
 		$check_time = $time - 10*60;
 		$sql1 = "SELECT * FROM Failed_Login WHERE `username` = ? AND `time` > ?";
@@ -44,9 +44,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 			$db->close();
 			$string4 = "Your account has been blocked to login, please try it later";
 			header("Location:..?val4=$string4");
-		}
-		$db->close();
-		
+		}		
 		else {
 			$password_sql = "SELECT `password_hash` FROM auth WHERE username = ?";
 			$password_prepare = $auth->prepare($password_sql);
@@ -123,6 +121,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 			}
 		}
 		}
+	}
 	if(empty($_POST["username"]) || empty($_POST["password"])) {
 		$string3 = "Please fill in all required fields";
 		header("Location: ..?val3=$string3");
