@@ -89,6 +89,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 					$_SESSION["userid"] = $user_id;
 					$_SESSION["start"] = $start_time;
 					$_SESSION["expire"] = $start_time + (24*60*60);
+					$_SESSION["id"] = session_id();
 				$agri_star_001->close();
 				$auth->close();
 				include_once "logdb_connect.php";
