@@ -45,6 +45,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 			$string4 = "Your account has been blocked to login, please try it later";
 			header("Location:..?val4=$string4");
 		}
+		$db->close();
 		
 		else {
 			$password_sql = "SELECT `password_hash` FROM auth WHERE username = ?";
