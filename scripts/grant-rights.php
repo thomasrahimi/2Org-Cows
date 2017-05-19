@@ -34,6 +34,27 @@ if(hash_equals($calc, $_POST["grant_token"])) {
 					$stmt3->execute();
 			}
 		}
+                $sql2 = "SELECT * FROM grants WHERE `giving_group` = ? AND `access` = 1";
+                $stmt2 = $agri_star_001->prepare($sql2);
+                $stmt2->bind_param('i', $giving_group);
+                $stmt2->execute();
+                $stmt2_result = $stmt2->get_result();
+                while ($stmt2_array = $stmt2_result->fetch_assoc()) {
+                    foreach ($_POST["access"] as $group){
+                        $receiving_group = $stmt2_array["receiving_group"];
+                        $check_array = in_array($receiving_group,$_POST["access"]);
+                        if ($check_array === false) {
+                            $sql3 = "UPDATE grants SET `access`= 0 WHERE `giving_group` = ? AND `receiving_group` = ?";
+                            $stmt3 = $agri_star_001->prepare($sql3);
+                            $stmt3->bind_param('ii', $giving_group, $receiving_group);
+                            $stmt3->execute();
+                        }
+                        
+                        
+                    }
+                    
+                }
+                
 		$var1 = "Access successfully updated";
 		$agri_star_001->close();
 		header("Location:../admin?val1=$var1");
