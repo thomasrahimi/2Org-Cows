@@ -29,6 +29,7 @@ if(!empty($_POST["new_institution"]) &&
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			$val1 = "Please provide a proper e-mail address";
 			header("Location: ../admin?val1=$val1");
+			exit();
 		}
 		else {
 			include_once "agri_star_001_connect.php";
@@ -51,6 +52,7 @@ if(!empty($_POST["new_institution"]) &&
 				$agri_star_001->close();
 				$var5 = "Country does not exist in database";
 				header("Location: ../admin?val5=$var5");
+				exit();
 			} else {
 			$accountable_person = $agri_star_001->real_escape_string($_POST["accountable_person"]);//string
 			$email = $agri_star_001->real_escape_string($_POST["institution_email"]);//string
@@ -102,6 +104,7 @@ if(!empty($_POST["new_institution"]) &&
 			if($stmt1 == false) {
 				$error_string1 = "Database error: $error1";
 				header("Location: ../admin?val1=$error_string1");
+				exit();
 			} else {
 			$group_sql = "SELECT `ID_Group` FROM Dim_Group";
 			$groups = $agri_star_001->query($group_sql);
@@ -123,16 +126,19 @@ if(!empty($_POST["new_institution"]) &&
 			$val2 = "Institution $new_institution successfully created";
 			$agri_star_001->close();
 			header("Location: ../admin?val2=$val2");
+			exit();
 			}
 			}
 		}
 		} else {
 		$val3 = "Please complete the information, required to create an institution";
 		header("Location: ../admin?val3=$val3");
+		exit();
 	}
 } else {
 	$val1 = "Session terminated due to security concerns. Please check your internet connection";
 	session_destroy();
 	header("Location: ..?val=$val1");
+	exit();
 }
 ?>

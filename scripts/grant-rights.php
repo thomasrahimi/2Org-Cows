@@ -37,6 +37,7 @@ if(hash_equals($calc, $_POST["grant_token"])) {
 		$var1 = "Access successfully updated";
 		$agri_star_001->close();
 		header("Location:../admin?val1=$var1");
+		exit();
 	} else {
 		echo "error";
 	}
@@ -44,5 +45,6 @@ if(hash_equals($calc, $_POST["grant_token"])) {
 	$var2 = "Session terminated due to security concerns";
 	session_destroy();
 	header("Location:..?val2=$var2");
+	exit();
 }
 ?>

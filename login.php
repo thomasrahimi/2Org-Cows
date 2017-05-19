@@ -6,6 +6,7 @@
 		session_name("2Org-Cows");
 		session_start();
 		header("Location:./home");
+		exit();
 	}
 	else {
 	session_start();
@@ -21,6 +22,8 @@
 	else {
 		$cookies_state = "Please enable cookies, to use 2Org-Cows";
 	}
+	session_name("login");
+	session_start();
 	include_once "./scripts/logdb_connect.php";
 	if(isset($_SERVER["HTTP_USER_AGENT"])) {
 		$user_agent_1 = $_SERVER["HTTP_USER_AGENT"];
@@ -32,23 +35,20 @@
 	$user_ip_whole = $_SERVER['REMOTE_ADDR'];
 	$user_ip_whole = $db->real_escape_string($user_ip_whole);
 	$user_ip_array = explode(".", $user_ip_whole);
-	$user_ip = "$user_ip_array[0]."."$user_ip_array[1]."."$user_ip_array[2]";
+	$user_ip = "$user_ip_array[0]."."$user_ip_array[1]."."$user_ip_array[2]";#shorten the IP address to three blocks out of four
 	$time = date("U"); //date in Unix-Time
 	$sql = "INSERT INTO Log_Table (time, user_agent, user_ip) VALUES (?,?,?)";
 	$stmt = $db->prepare($sql);
 	$stmt->bind_param('iss',$time,$user_agent,$user_ip);
 	$stmt->execute();
 	$db->close();
-	session_name('Login');
-	session_set_cookie_params(60*30, "/", $domain = "org-cow-breeding.router_of_thomas", $secure = true, $httponly = true);
-	session_start();
 ?>
 <html>
 <head>
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" type="text/css" href="./static/2Org-Cows.css"/>
 	<link rel="shortcut icon" href="./static/Favicon-2Org-Cows.ico" type="image"/>
-	<title>Login</title>
+	<title>2Org-Cows - Login</title>
 </head>
 <body>
 	<div class="page">
@@ -80,12 +80,10 @@
 					<tr><td>Username</td><td><input type="text" name="username" required autofocus /></td></tr>
 					<tr><td>Password</td><td><input type="password" name="password" required /></td></tr>
 					<?php
-					if(empty($_SESSION["token"])) {
-						$_SESSION["token"] = bin2hex(random_bytes(32));
-					}
-					$token = $_SESSION["token"]
+						$_SESSION["token_session"] = bin2hex(random_bytes(32));
+						$token = $_SESSION["token_session"];
 					?>
-					<input type="hidden" name="token" value="<?= $token ?>" />
+					<input type="hidden" name="token_form" value="<?= $token ?>" />
 					<tr><td><input type="submit" name="login" value="login" formaction="./scripts/login_script.php"/></td></tr>
 					</table>
 				</form>

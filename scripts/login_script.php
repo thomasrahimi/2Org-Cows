@@ -1,11 +1,11 @@
 <?php
-session_name("Login");
+session_name("login");
 session_start();
 #error_reporting(E_ALL);
 #ini_set('display_errors', 'On');
-if(!empty($_POST["token"])) {
-if(hash_equals($_SESSION["token"], $_POST["token"])) {
-	unset($_SESSION["token"]);
+if(!empty($_POST["token_form"])) {
+if(hash_equals($_SESSION["token_session"], $_POST["token_form"])) {
+	unset($_SESSION["token_session"]);
 	if (isset($_POST["username"]) && 
 		!empty($_POST["username"])) {
 		include_once "auth_connect.php";		
@@ -28,6 +28,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 			$auth->close();
 			$string1 ="No user found matching your username";
 			header("Location: ../login.php?val1=$string1");
+			exit();
 		}
 		else{
 		$time = date("U");
@@ -44,6 +45,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 			$db->close();
 			$string4 = "Your account has been blocked to login, please try it later";
 			header("Location:..?val4=$string4");
+			exit();
 		}		
 		else {
 			$password_sql = "SELECT `password_hash` FROM auth WHERE username = ?";
@@ -78,7 +80,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 				$user_agent = $agri_star_001->real_escape_string($_SERVER["HTTP_USER_AGENT"]);
 				$user_ip = $_SERVER["REMOTE_ADDR"];
 				session_destroy(); //destroy the old login session
-				session_set_cookie_params($lifetime, $path = "/", $domain = "org-cow-breeding.router_of_thomas", $secure = true, $httponly = true);//cookies looses validity after one day
+				session_set_cookie_params($lifetime, $secure = true, $httponly = true);//cookies looses validity after one day
 				session_name("2Org-Cows");
 				session_start(); //start the new session for database queries etc
 					$_SESSION["ip"] = $user_ip;
@@ -101,6 +103,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 				$log_query1->execute();
 				$db->close();
 				header("Location:../home");
+				exit();
 				}
 			else {
 				$agri_star_001->close();
@@ -119,6 +122,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 				$db->close();
 				$string2 = "Login credentials do not match";
 				header("Location: ..?val2=$string2");
+				exit();
 			}
 		}
 		}
@@ -126,6 +130,7 @@ if(hash_equals($_SESSION["token"], $_POST["token"])) {
 	if(empty($_POST["username"]) || empty($_POST["password"])) {
 		$string3 = "Please fill in all required fields";
 		header("Location: ..?val3=$string3");
+		exit();
 	}
 }
 else {
@@ -133,6 +138,7 @@ else {
 	unset($_SESSION["token"]);
 	session_destroy();
 	header("Location: ..?val1=$string1");
+	exit();
 }
 }
 ?>

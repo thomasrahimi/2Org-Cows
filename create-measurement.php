@@ -2,9 +2,9 @@
 #error_reporting(E_ALL);
 	session_name("2Org-Cows");
 	session_start(); 
+	include_once "./scripts/check-session_restricted.php";
 	$date = date("U");
 	$_SESSION["expire"] = $date + (60*60*24);
-	include_once "./scripts/check-session_restricted.php";
 	include_once "./scripts/agri_star_001_connect.php";
 ?>
 <html>

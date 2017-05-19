@@ -88,11 +88,13 @@ if(isset($_POST["search-criteria"]) && isset($_POST["operator"]) && isset($_POST
 	}
 	$create_string = "$search_criteria && $search_location && $operator && $condition && $order && $date_begin && $date_end && $timezone"; //please find out how to continue the current statement
 	header("Location: ../results.php?val1=$create_string");
+	exit();
 }
 }
 else {
 	$var2 = "Please complete your search";
 	header("Location: ../search?val2=$var2");
+	exit();
 }
 $agri_star_001->close();
 }
@@ -100,5 +102,6 @@ else {
 $val1 = "Session terminated due to security concerns. Please check your internet connection";
 session_destroy();
 	header("Location: ../login.php?val1=$val1");
+	exit();
 }
 ?>

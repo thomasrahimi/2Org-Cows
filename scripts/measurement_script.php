@@ -12,10 +12,12 @@ if(!empty($_POST["measurement_name"]) &&
 		if(filter_var($link1,FILTER_VALIDATE_URL) == null) {
 			$var1 = "Your link for description doesn't seem to be legit";
 			header("Location:../measurement?val1=$var1");
+			exit();
 		}
 		if(filter_var($link2,FILTER_VALIDATE_URL) == null) {
 			$var1 = "Your vendor link doesn't seem to be legit";
 			header("Location:../measurement?val1=$var1");
+			exit();
 		}
 		else {
 			$measurement_name = $agri_star_001->real_escape_string($_POST["measurement_name"]);
@@ -68,15 +70,18 @@ if(!empty($_POST["measurement_name"]) &&
 			$var2 = "Method $measurement_name successfully created";
 			$agri_star_001->close();
 			header("Location:../measurement?val1=$var2");
+			exit();
 		}
 	} else {
 		$var3 = "Please complete the entries";
 		header("Location:../measurement?val3=$var3");
+		exit();
 	}
 } else {
 	session_destroy();
 	$var4 = "Session terminated for security concerns. Please check your internet connection";
 	header("Location:..?val4=$var4");
+	exit();
 }
 
 		

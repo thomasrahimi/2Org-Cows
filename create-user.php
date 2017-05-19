@@ -1,11 +1,11 @@
 <?php
 #error_reporting(E_ALL);
-	$date = date("U");
-	$_SESSION["expire"] = $date + (60*60*24);
-	include_once "./scripts/check-session_restricted.php";
-	include_once "./scripts/agri_star_001_connect.php";
 	session_name("2Org-Cows");
 	session_start(); 
+	include_once "./scripts/check-session_restricted.php";//check whether user is logged in and has sufficient permissions
+	$date = date("U");
+	$_SESSION["expire"] = $date + (60*60*24);//set expiry date for session
+	include_once "./scripts/agri_star_001_connect.php";
 	$user_role = $_SESSION["role"]; //user_role important for the content displayed to the specific user
 	$group = $_SESSION["group"];
 ?>

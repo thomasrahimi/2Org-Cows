@@ -1,7 +1,9 @@
 <?php
-include_once './scripts/check-session.php';
 session_name("2Org-Cows");
 session_start(); 
+include_once './scripts/check-session.php';
+$date = date("U");
+$_SESSION["expire"] = $date + (60*60*24);
 $user_role = $_SESSION["role"];
 ?>
 <html>

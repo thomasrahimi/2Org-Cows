@@ -27,24 +27,29 @@ if(!empty($_POST["token"])) {
 						$success = "Password successfully updated";
 						$auth->close();
 						header("Location:../user?val1=$success");
+						exit();
 					} else {
 							$auth->close();
 							$string1 = "Your new password does not match the controll";
 							header("Location:../user?val1=$string1");
+							exit();
 							}
 				} else {
 					$auth->close();
 					$string2 = "Your old password does not match";
 					header("Location:../user?val1=$string2");
+					exit();
 				}
 			} else {
 				$string3 = "Please fill in all required fields";
 				header("Location:../user?val1=$string3");
+				exit();
 			}
 	} else {
 		$string4 = "Session terminated due to security concerns. Please check your internet connection";
 		session_destroy();
 		header("Location:..?val1=$string4");
+		exit();
 	}
 }
 ?>

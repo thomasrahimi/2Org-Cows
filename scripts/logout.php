@@ -14,4 +14,5 @@
 	session_destroy();
 	$val1 = "Thanks for visiting 2Org-Cows project site";
 	header("Location: ..?val1=$val1");
+	exit();
 ?>

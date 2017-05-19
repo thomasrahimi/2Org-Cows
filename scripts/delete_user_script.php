@@ -22,20 +22,24 @@ unset($_SESSION["grant_token"]);
 		$auth->close();
 		$agri_star_001->close();
 		header("Location: ../admin?val1=$success");
+		exit();
 	}
 	if(!isset($_POST["confirm"]) || !isset($_POST["user_delete"])) {
 		$warning = "Please select user and confirm deletion";
 		header("Location: ../admin?val1=$warning");
+		exit();
 	}
 }
 else {
 	$val1 = "You do not have the rights to delete a user";
 	header("Location:../admin?val1=$val1");
+	exit();
 }
 }
 else {
 	$val1 = "Session terminated due to security concerns. Please check your internet connection";
 	session_destroy();
 	header("Location: ../login.php?val1=$val1");
+	exit();
 }
 ?>

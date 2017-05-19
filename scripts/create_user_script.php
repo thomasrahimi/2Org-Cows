@@ -63,48 +63,56 @@ if(hash_equals($calc, $_POST["user_token"])) {
 				$auth->close();
 				$string2 = "Please provide a proper e-mail address";
 				header("Location: ../admin?val2=$string2");
+				exit();
 			}		
 			if(strcmp($password_check1, $password_check2) !== 0) {
 				$agri_star_001->close();
 				$auth->close();
 				$string3 = "Passwords do not match";
 				header("Location: ../admin?val7=$string3");
+				exit();
 			}				
 			if($num_rows_username != null) {
 				$agri_star_001->close();
 				$auth->close();
 				$string4 = "username not available";
 				header("Location: ../admin?val4=$string4");
+				exit();
 			}
 			if(in_array($user_role, $controll_user_role_array) == FALSE) {  //checks, if the user role is in the allowed area
 				$agri_star_001->close();
 				$auth->close();
 				$string5 = "Error choosing user role";
 				header("Location: ../admin?val5=$var5");
+				exit();
 			}
 			if($user_role == 0) { 
 				$agri_star_001->close();
 				$auth->close();
 				$string6 = "please select a role for the user";
 				header("Location: ../admin?val6=$string6");
+				exit();
 			}
 			if($num_rows_group == 0) {
 				$agri_star_001->close();
 				$auth->close();
 				$string7 = "The requested group does not exist";
 				header("Location: ../admin?val7=$string7");
+				exit();
 				}
 			if($_SESSION["role"] == 2 && $user_role > 2) {
 				$agri_star_001->close();
 				$auth->close();
 				$string8 = "You are not allowed to create users with higher permissions";
 				header("Location: ../admin?val8=$string8");
+				exit();
 			}
 			if($_SESSION["role"] == 2 && $group_id != $_SESSION["group"]) {
 				$agri_star_001->close();
 				$auth->close();
 				$string9 = "You are not allowed to modify the group";
 				header("Location: ../admin?val9=$string9");
+				exit();
 			}
 			else {
 			$password = htmlspecialchars($_POST["password"]);
@@ -150,6 +158,7 @@ if(hash_equals($calc, $_POST["user_token"])) {
 			if($dim_user == false) {
 				$error_string1 = "Database error: $errors1";
 				header("Location: ../admin?val1=$error_string1");
+				exit();
 			} else {
 			$id_user = $dim_user->insert_id; //retrieves the auto_increment value of the Dim_User transaction
 			$sql2 = "INSERT INTO auth 
@@ -168,22 +177,26 @@ if(hash_equals($calc, $_POST["user_token"])) {
 			if($auth_table == false) {
 				$error_string2 = "Database error 2: $errors2";
 				header("Location: ../admin?val1=$error_string2");
+				exit();
 			} else {
 			$string1 = "user $fullname successfully created";
 			$agri_star_001->close();
 			$auth->close();
 			header("Location: ../admin?val1=$string1");
+			exit();
 			}
 			}
 		}
 		} else {
 			$string6 = "Please complete your information";
 			header("Location: ../admin?val6=$string6");
+			exit();
 		}
 
 } else {
 	$val1 = "Session terminated due to security concerns. Please check your internet connection";
 	session_destroy();
 	header("Location: ..?val1=$val1");
+	exit();
 }
 ?>
