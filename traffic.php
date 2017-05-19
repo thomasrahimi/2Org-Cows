@@ -81,6 +81,22 @@ $_SESSION["expire"] = $date + (60*60*24);
 							?>
 						</td>
 					</tr>
+					<tr>
+						<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
+							Accesses by IP-Address
+						</td>
+						<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
+							<?php
+								$sql5 = "SELECT `user_ip`,COUNT(`user_ip`) as `count` FROM Log_Table WHERE `time` > '$week' GROUP BY `user_ip`";
+								$result5 = $db->query($sql5);
+								while($result_array5 = $result5->fetch_assoc()) {
+									$ip = $result_array5["user_ip"];
+									$amounts = $result_array5["count"];
+									echo nl2br("$ip → $amounts \n");
+								}
+							?>
+						</td>
+					</tr>
 				</table>
 			</div>
 			<div class="center_2">
