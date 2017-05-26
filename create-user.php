@@ -73,13 +73,16 @@
 			if($user_role > 2) {
 				?>
 			<h3>Delete users</h3>
-			<form action="scripts/delete_user_script.php" method="POST">
+			<form action="./scripts/delete_user_script.php" method="POST">
 			<table>
 			<tr><td>Select user to delete</td><td><select name="user_delete">
 			<?php
-				$sql3 = "SELECT `ID_User`, `User_FullName` FROM Dim_User WHERE (`ID_Group` = '$group') AND (`ID_User` <> '$user_id') AND (`user_not_active` IS NULL)";
-				$user = $agri_star_001->query($sql3);
-				while($user_array = $user->fetch_assoc()) {
+				$sql3 = "SELECT `ID_User`, `User_FullName` FROM Dim_User WHERE (`ID_Group` = ?) AND (`ID_User` <> ?) AND (`user_not_active` IS NULL)";
+				$stmt5 = $agri_star_001->prepare($sql3);
+				$stmt5->bind_param('ii', $group, $user_id);
+				$stmt5->execute();
+				$user_result = $stmt5->get_result();
+				while($user_array = $user_result->fetch_assoc()) {
 			?>
 			<option value="<?= $user_array["ID_User"] ?>"><?= $user_array["User_FullName"] ?></option>
 			<?php
@@ -99,10 +102,44 @@
 			<?php
 			}
 			?>
+			<h3>Alter password for other user</h3>
+                        <form action="scripts/set-password.php" method="POST">
+                            <table>
+                                <tr>
+                                    <td>Select user:</td>
+                                    <td><select name="update_user_password">
+                                        <?php
+                                        $sql3 = "SELECT `ID_User`, `User_FullName` FROM Dim_User WHERE (`ID_Group` = ?) AND (`ID_User` <> ?) AND (`user_not_active` IS NULL)";
+                                        $stmt6 = $agri_star_001->prepare($sql3);
+                                        $stmt6->bind_param('ii', $group, $user_id);
+                                        $stmt6->execute();
+                                        $user_result = $stmt6->get_result();
+                                        while($userarray = $user_result->fetch_assoc()){
+                                        ?>
+                                            <option value="<?= $userarray["ID_User"] ?>"><?= $userarray["User_FullName"] ?></option>
+                                        <?php 
+                                        }
+                                        ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Select new password:</td>
+                                    <td><input type="password" name="set_user_password" required /></td>
+                                </tr>
+                                <tr>
+                                    <td>Confirm password:</td>
+                                    <td><input type="password" name="confirm_set_user_password" required /></td>
+                                </tr>
+                            </table>
+                            <?php
+                                $_SESSION["set_password_token"] = uniqid();
+                            ?>
+                            <input type="hidden" name="set_password_token" value="<?= hash_hmac('sha256', 'update_user_password', $_SESSION["set_password_token"]) ?>" />
+                            <input type="submit" name="set_password" value="update password" formaction="./scripts/set-password.php" />
+                        </form>
 			</div>
 			<div class="center_4">
-			<!--First user:
-			<a href="./scripts/first-user.php">First User</a>-->
 			<?php
 			if($user_role > 2) {
 			?>
