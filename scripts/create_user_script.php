@@ -9,6 +9,7 @@ if(hash_equals($calc, $_POST["user_token"])) {
 	unset($_SESSION["group_token"]);
 	unset($_SESSION["delete_token"]);
 	unset($_SESSION["grant_token"]);
+	unset($_SESSION["set_password_token"]);
 	$date = date("U");
 	$_SESSION["expire"] = $date + (60*60*24);
 	if(!empty($_POST["fullname"]) && 

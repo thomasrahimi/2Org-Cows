@@ -120,9 +120,9 @@ $dim_user_array = $dim_user->fetch_assoc();
 						</tr>
 					</table>
 					<?php
-					$_SESSION["token"] = bin2hex(random_bytes(32));
+					$_SESSION["update_password_token"] = bin2hex(random_bytes(32));
 					?>
-					<input type="hidden" name="token" value="<?= $_SESSION["token"] = bin2hex(random_bytes(32)) ?>" />
+					<input type="hidden" name="update_password_token" value="<?= $_SESSION["update_password_token"] = bin2hex(random_bytes(32)) ?>" />
 					<input type="submit" name="submit_password" value="change password" formaction="./scripts/update-password.php" />
 				</form>
 				<?php

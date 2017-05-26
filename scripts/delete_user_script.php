@@ -7,6 +7,7 @@ unset($_SESSION["delete_token"]);
 unset($_SESSION["user_token"]);
 unset($_SESSION["group_token"]);
 unset($_SESSION["grant_token"]);
+unset($_SESSION["set_password_token"]);
 	if($_SESSION["role"] > 2) {
 	if(isset($_POST["confirm"]) && isset($_POST["user_delete"])) {
 		include_once "auth_connect.php";		

@@ -9,6 +9,7 @@ if(hash_equals($calc, $_POST["grant_token"])) {
 	unset($_SESSION["delete_token"]);
 	unset($_SESSION["user_token"]);
 	unset($_SESSION["group_token"]);
+	unset($_SESSION["set_password_token"]);
 	if(!empty($_POST["access"])) {
 		include_once 'agri_star_001_connect.php';
 		$giving_group = intval($_SESSION["group"]);

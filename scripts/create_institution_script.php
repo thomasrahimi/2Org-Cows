@@ -12,9 +12,9 @@ unset($_SESSION["group_token"]);
 unset($_SESSION["user_token"]);
 unset($_SESSION["delete_token"]);
 unset($_SESSION["grant_token"]);
+unset($_SESSION["set_password_token"]);
 $date = date("U");
 $_SESSION["expire"] = $date + (60*60*24);
-unset($_SESSION["token"]);
 if(!empty($_POST["new_institution"]) &&
 	!empty($_POST["department"]) &&
 	!empty($_POST["working_group_long"]) &&

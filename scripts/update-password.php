@@ -2,8 +2,8 @@
 session_name("2Org-Cows");
 session_start();
 if(!empty($_POST["token"])) {
-	if(hash_equals($_SESSION["token"], $_POST["token"])) {
-		unset($_SESSION["token"]);
+	if(hash_equals($_SESSION["update_password_token"], $_POST["update_password_token"])) {
+		unset($_SESSION["update_password_token"]);
 		if(!empty($_POST["old_password"]) && 
 			!empty($_POST["new_password"]) && 
 			!empty($_POST["verify_password"])) {
