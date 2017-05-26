@@ -41,11 +41,23 @@ $_SESSION["expire"] = $date + (60*60*24);
 	</div>
 	<div class="center">
 		<div class="center_1">
+		Accepted file types are:
+                    <ul>
+                        <li>*.csv</li>
+                        <li>*.xlsx</li>
+                        <li>*.xls</li>
+                        <li>*.ods</li>
+                        <li>*.adis</li>
+                        <li>*.txt</li>
+                    </ul>
 			<form method="POST" enctype="multipart/form-data" action="./scripts/upload.php"> 
 			<table>
 			<tr>
 				<td style="min-width:10vw; text-align:center;">Please select a file for upload</td>
-				<td><input type="file" size="30" name="data_files"/></td>
+				<td>
+                                    <input type="hidden" name="MAX_FILE_SIZE" value=20000000 /> <!--accepts files to up till 20 MBytes -->
+                                    <input type="file" size="30" name="data_files"/>
+				</td>
 			</tr>
 			</table>
 			Choose the file type
@@ -68,7 +80,11 @@ $_SESSION["expire"] = $date + (60*60*24);
 			?>
 			<input type="hidden" name="upload_token" value="<?= $_SESSION["upload_token"] ?>" />
 			<input type="submit" name="upload" value="upload file" formaction="./scripts/upload.php"/>
-			</form>
+			</form></br>
+			<?php
+			$echo = $_GET;
+			echo implode(" ", $echo);
+			?>
 		</div>
 	</div>
 	<footer class="footer">
