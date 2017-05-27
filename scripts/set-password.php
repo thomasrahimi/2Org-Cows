@@ -1,4 +1,5 @@
 <?php
+require_once 'session-handler.php';
 session_name("2Org-Cows");
 session_start();
 $math = hash_hmac('sha256', 'update_user_password', $_SESSION["set_password_token"]);

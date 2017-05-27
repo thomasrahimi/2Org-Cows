@@ -1,6 +1,7 @@
 <?php
 #ini_set('display_errors',1);
-error_reporting(E_ALL);
+#error_reporting(E_ALL);
+require_once 'session-handler.php';
 session_name("2Org-Cows");
 session_start(); 
 $calc = hash_hmac('sha256', 'user_form', $_SESSION["user_token"]);

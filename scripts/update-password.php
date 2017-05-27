@@ -1,4 +1,5 @@
 <?php
+require_once 'session-handler.php';
 session_name("2Org-Cows");
 session_start();
 if(!empty($_POST["update_password_token"])) {

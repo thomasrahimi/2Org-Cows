@@ -1,4 +1,5 @@
 <?php
+require_once 'session-handler.php';
 session_name("login");
 session_start();
 #error_reporting(E_ALL);
@@ -6,8 +7,8 @@ session_start();
 if(!empty($_POST["token_form"])) {
 if(hash_equals($_SESSION["token_session"], $_POST["token_form"])) {
 	unset($_SESSION["token_session"]);
-	if (isset($_POST["username"]) && 
-		!empty($_POST["username"])) {
+	if (!empty($_POST["username"]) && 
+            !empty($_POST["username"])) {
 		include_once "auth_connect.php";		
 		include_once "agri_star_001_connect.php";
 		include_once "logdb_connect.php";
@@ -77,6 +78,7 @@ if(hash_equals($_SESSION["token_session"], $_POST["token_form"])) {
 				
 				$start_time = date("U");
 				$lifetime = 60*60*24;
+				$expiry = $start_time + $lifetime;
 				$user_agent = $agri_star_001->real_escape_string($_SERVER["HTTP_USER_AGENT"]);
 				$user_ip = $_SERVER["REMOTE_ADDR"];
 				session_destroy(); //destroy the old login session
@@ -90,7 +92,7 @@ if(hash_equals($_SESSION["token_session"], $_POST["token_form"])) {
 					$_SESSION["user"] = $username;
 					$_SESSION["userid"] = $user_id;
 					$_SESSION["start"] = $start_time;
-					$_SESSION["expire"] = $start_time + (24*60*60);
+					$_SESSION["expire"] = $expiry;
 					$_SESSION["id"] = session_id();
 				$agri_star_001->close();
 				$auth->close();

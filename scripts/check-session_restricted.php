@@ -1,15 +1,16 @@
 <?php
+require_once './scripts/session-handler.php';
 session_name("2Org-Cows");
 session_start();
 $user_role = $_SESSION["role"];
-$now = date("U");
+/*$now = date("U");
 if($now > $_SESSION["expire"]) {
 		$val4 = "Session has timed out, please login again";
 		session_destroy();
 		header("Location: .?val4=$val4");
 		exit();
-	}
-elseif(isset($_SESSION["ip"])) {
+	}*/
+if(isset($_SESSION["ip"])) {
 	if($_SESSION["id"] != session_id() ||
 	$_SERVER["REMOTE_ADDR"] != $_SESSION["ip"] || 
 	$_SERVER["HTTP_USER_AGENT"] != $_SESSION["user_agent"] ||

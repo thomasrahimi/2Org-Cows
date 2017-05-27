@@ -1,4 +1,5 @@
 <?php
+require_once 'session-handler.php';
 session_name("2Org-Cows");
 session_start(); 
 $calc = hash_hmac('sha256', 'search', $_SESSION["search_token"]);

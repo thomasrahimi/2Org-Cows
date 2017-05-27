@@ -1,4 +1,5 @@
 <?php
+require_once './scripts/session-handler.php';
 session_name("2Org-Cows");
 session_start();
 include_once './scripts/check-session_restricted.php';

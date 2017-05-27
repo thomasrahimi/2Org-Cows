@@ -1,6 +1,5 @@
 <?php
-$date = date("U");
-$_SESSION["expire"] = $date + (60*60*24);
+require_once './scripts/session-handler.php';
 session_name("2Org-Cows");
 session_start();
 include_once "./scripts/check-session.php";

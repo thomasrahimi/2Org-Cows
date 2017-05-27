@@ -1,5 +1,6 @@
 <?php
 #error_reporting(E_ALL);
+require_once './scripts/session-handler.php';
 	session_name("2Org-Cows");
 	session_start(); 
 	include_once "./scripts/check-session.php";

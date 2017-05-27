@@ -9,6 +9,7 @@
 		exit();
 	}
 	else {
+	require_once './scripts/session-handler.php';
 	session_start();
 	$session_id1 = session_id();
 	session_destroy();
