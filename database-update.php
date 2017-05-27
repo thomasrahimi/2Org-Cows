@@ -3,8 +3,6 @@ require_once './scripts/session-handler.php';
 session_name("2Org-Cows");
 session_start();
 include_once './scripts/check-session_restricted.php';
-$date = date("U");
-$_SESSION["expire"] = $date + (60*60*24);
 ?>
 <html>
 <head>
@@ -42,6 +40,10 @@ $_SESSION["expire"] = $date + (60*60*24);
 	</div>
 	<div class="center">
 		<div class="center_1">
+		<?php
+		$user_role = $_SESSION["role"];
+		if ($user_role > 1) { 
+                ?>		
 		Accepted file types are:
                     <ul>
                         <li>*.csv</li>
@@ -85,6 +87,7 @@ $_SESSION["expire"] = $date + (60*60*24);
 			<?php
 			$echo = $_GET;
 			echo implode(" ", $echo);
+			}
 			?>
 		</div>
 	</div>

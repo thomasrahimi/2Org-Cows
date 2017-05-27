@@ -22,7 +22,7 @@ $possible_roles = [
 <?php
 }
 }
-else {
+elseif($user_role == 4) {
 $possible_roles = [
 				0 => "",
 				1 => "student", 

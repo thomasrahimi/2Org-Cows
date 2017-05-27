@@ -45,6 +45,10 @@ require_once './scripts/session-handler.php';
 		</div>
 		<div class="center">
 			<div class="center_1">
+			<?php
+			$user_role = $_SESSION["role"];
+			if ($user_role > 1) {
+			?>
 			<h3>Create new measurement method</h3>
 				<form method="POST" action="./scripts/measurement_script.php">
 					<table>
@@ -104,9 +108,13 @@ require_once './scripts/session-handler.php';
 				<?php
 					$echo = $_GET;
 					echo implode(" ",$echo);
+					}
 				?>
 			</div>
 			<div class="center_2">
+			<?php
+			if ($user_role > 1) {
+                        ?>
 			<h3>Measurement methods, created by your group</h3>
 				<table style="border:1px solid black; border-collapse:collapse;">
 				<tr>
@@ -135,6 +143,7 @@ require_once './scripts/session-handler.php';
 				</tr>
 				<?php
 					}
+                                }
 				?>
 				</table>
 			</div>

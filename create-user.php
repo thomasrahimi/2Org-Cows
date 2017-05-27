@@ -53,9 +53,13 @@ require_once './scripts/session-handler.php';
 		</div>
 			<div class="center">
 			<div class="center_1">
+			<?php
+			if ($user_role > 1) { 
+                        ?>		
 			<h3>Create new user</h3>
 				<?php
 					include_once("./include/create-user-form.php");
+					}
 				?>	
 			</div>
 			<div class="center_2">
@@ -100,9 +104,6 @@ require_once './scripts/session-handler.php';
 			<input type="hidden" name="delete_token" value="<?= hash_hmac('sha256', 'delete_user', $_SESSION["delete_token"]) ?>"/>
 			<input type="submit" name="delete_user" value="delete user" formaction="./scripts/delete_user_script.php" />
 			</form>
-			<?php
-			}
-			?>
 			<h3>Alter password for other user</h3>
                         <form action="scripts/set-password.php" method="POST">
                             <table>
@@ -139,6 +140,9 @@ require_once './scripts/session-handler.php';
                             <input type="hidden" name="set_password_token" value="<?= hash_hmac('sha256', 'update_user_password', $_SESSION["set_password_token"]) ?>" />
                             <input type="submit" name="set_password" value="update password" formaction="./scripts/set-password.php" />
                         </form>
+                        <?php
+			}
+			?>
 			</div>
 			<div class="center_4">
 			<?php
