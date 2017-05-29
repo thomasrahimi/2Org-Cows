@@ -77,6 +77,22 @@ include_once './scripts/check-session_restricted.php';
 				<td style="text-align:center; border:1px solid black; border-collapse:collapse;"><input type="radio" name="file_type" value="csv" /></td>
 				<td style="text-align:center; border:1px solid black; border-collapse:collapse;"><input type="radio" name="file_type" value="excel" /></td>
 			</tr>
+			<tr>
+                            <td style="text-align:center; border:1px solid black; border-collapse:collapse;">Select measurement procedure for this data</td>
+                            <td style="text-align:center; border:1px solid black; border-collapse:collapse;"><select name="choose-measurement">
+                                <?php
+                                include_once './scripts/agri_star_001_connect.php';
+                                $group = intval($_SESSION["group"]);
+                                $sql1 = "SELECT `ID_Gage`, `Gage_LongName` FROM Dim_Gage WHERE `Group` = '$group'";
+                                $stmt1 = $agri_star_001->query($sql1);
+                                while ($result_array = $stmt1->fetch_assoc()) { ?>
+                                    <option value="<?= $result_array["ID_Gage"] ?>"><?= $result_array["Gage_LongName"] ?></option>
+                                <?php 
+                                }
+                                ?>
+                                </select>
+                            </td>
+                        </tr>
 			</table>
 			<?php //this part is for CSRF protection
 				$_SESSION["upload_token"] = bin2hex(random_bytes(32));
