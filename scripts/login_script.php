@@ -77,6 +77,8 @@ if(hash_equals($_SESSION["token_session"], $_POST["token_form"])) {
 				$role = $user_array["User_Role"];
 				
 				$user_agent = $agri_star_001->real_escape_string($_SERVER["HTTP_USER_AGENT"]);
+				$start_time = date("U");
+				$lifetime = (24*60*60);
 				$user_ip = $_SERVER["REMOTE_ADDR"];
 				session_destroy(); //destroy the old login session
 				session_set_cookie_params($lifetime, $secure = true, $httponly = true);//cookies looses validity after one day
