@@ -152,9 +152,9 @@ require_once './scripts/session-handler.php';
 			<form action="./scripts/grant-rights.php" method="POST">
 			<table style="border:1px solid black; border-collapse:collapse;">
 			<tr>
-				<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Institution</th>
-				<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Department</th>
-				<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">access to your data?</th>
+				<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;background-color:green;">Institution</th>
+				<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;background-color:green;">Department</th>
+				<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;background-color:green;">access to your data?</th>
 			</tr>
 			<?php
 				$sql4 = "SELECT `ID_Group`, `Group_Institution`, `Group_Department` FROM Dim_Group WHERE `ID_Group` <> '$group'";
