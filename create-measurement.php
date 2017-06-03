@@ -66,11 +66,7 @@ require_once './scripts/session-handler.php';
 								<select name="measurement_unit">
 								<?php
 								$measurement_units = [
-															" " => " ",
-															"kg" => "kg",
-															"m" => "m",
-															"l" => "l",
-															"m³" => "m³"];
+                                                                                    " " => " ",			"kg" => "kg",		"m" => "m",		"l" => "l",		"m³" => "m³"];
 								foreach($measurement_units as $key => $unit){
 								?>
 								<option value="<?= $key ?>"><?= $unit ?></option>
@@ -95,7 +91,11 @@ require_once './scripts/session-handler.php';
 						<tr>
 							<td>Link to Vendor</td>
 							<td><input type="text" name="vendor_link" placeholder="http://" required /></td>
-						</tr>		
+						</tr>
+						<tr style="height:10vh;">
+                                                        <td>Optional description text</td>
+                                                        <td><textarea name="description_text"/></textarea></td>
+                                                </tr>
 					</table>
 						<?php
 			 				$_SESSION["token"] = bin2hex(random_bytes(32)); //this part is for CSRF protection
@@ -119,7 +119,6 @@ require_once './scripts/session-handler.php';
 				<table style="border:1px solid black; border-collapse:collapse;">
 				<tr>
 					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Measurement Method</th>
-					<th style="min-width:2vw; text-align:center; border:1px solid black; border-collapse:collapse;">Abbr.</th>
 					<th style="min-width:2vw; text-align:center; border:1px solid black; border-collapse:collapse;">Unit</th>
 					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Measurement Error</th>
 					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Vendor</th>
@@ -127,13 +126,12 @@ require_once './scripts/session-handler.php';
 				</tr>
 				<?php
 				$group = intval($_SESSION["group"]);
-				$sql = "SELECT `Gage_LongName`,`Gage_ShortName`,`Unit`,`Measurement_Error`, `Vendor`, `Gage_Description_Link` FROM Dim_Gage WHERE `Group` = '$group'";
+				$sql = "SELECT `Gage_LongName`,`Gage_ShortName`,`Unit`,`Measurement_Error`, `Vendor`, `Gage_Description_Text`, `Gage_Description_Link` FROM Dim_Gage WHERE `Group` = '$group'";
 				$measurements = $agri_star_001->query($sql);
 				while($measurement_array = $measurements->fetch_assoc()) {
 				?>
 				<tr>
 					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Gage_LongName'] ?></td>
-					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Gage_ShortName'] ?></td>
 					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Unit'] ?></td>
 					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Measurement_Error'] ?></td>
 					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Vendor'] ?></td>
@@ -141,6 +139,11 @@ require_once './scripts/session-handler.php';
 						<a target="_blank" href="<?= $measurement_array['Gage_Description_Link'] ?>" ><?= $measurement_array['Gage_Description_Link'] ?></a>
 					</td>
 				</tr>
+				<tr>
+                                    <td colspan="5" style="text-align:center; border:1px solid black; border-collapse:collapse;">
+                                        <?= $measurement_array['Gage_Description_Text'] ?>
+                                    </td>
+                                </tr>
 				<?php
 					}
                                 }
