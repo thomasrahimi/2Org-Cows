@@ -61,8 +61,8 @@ $_SESSION["expire"] = $date + (60*60*24);
 								$time = 60*60*24*7;
 								$week = $date - $time;
 								$sql1 = "SELECT `time`, `user_ip` FROM Log_Table WHERE `time` > '$week'";
-								$result = $db->query($sql1);
-								$accesses = $result->num_rows;
+								$result1 = $db->query($sql1);
+								$accesses = $result1->num_rows;
 								echo $accesses;
 							?>
 						</td>
@@ -73,9 +73,9 @@ $_SESSION["expire"] = $date + (60*60*24);
 						</td>
 						<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
 							<?php
-								while($result_array = $result->fetch_assoc()) {
-									$ip_address = $result_array["user_ip"];
-									$unix_time1 = $result_array["time"];
+								while($result_array1 = $result1->fetch_assoc()) {
+									$ip_address = $result_array1["user_ip"];
+									$unix_time1 = $result_array1["time"];
 									$iso_time1 = gmdate('Y-m-d\ H:i:s', $unix_time1);
 									echo nl2br("$ip_address → $iso_time1 \n");
 								}
@@ -88,11 +88,11 @@ $_SESSION["expire"] = $date + (60*60*24);
 						</td>
 						<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
 							<?php
-								$sql5 = "SELECT `user_ip`,COUNT(`user_ip`) as `count` FROM Log_Table WHERE `time` > '$week' GROUP BY `user_ip`";
-								$result5 = $db->query($sql5);
-								while($result_array5 = $result5->fetch_assoc()) {
-									$ip = $result_array5["user_ip"];
-									$amounts = $result_array5["count"];
+								$sql2 = "SELECT `user_ip`,COUNT(`user_ip`) as `count` FROM Log_Table WHERE `time` > '$week' GROUP BY `user_ip`";
+								$result2 = $db->query($sql2);
+								while($result_array2 = $result2->fetch_assoc()) {
+									$ip = $result_array2["user_ip"];
+									$amounts = $result_array2["count"];
 									echo nl2br("$ip → $amounts \n");
 								}
 							?>
@@ -109,9 +109,9 @@ $_SESSION["expire"] = $date + (60*60*24);
 						</td>
 						<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
 							<?php
-								$sql2 = "SELECT `time`, `ID_User`, `IP` FROM Login_Table WHERE `time` > '$week'";
-								$result2 = $db->query($sql2);
-								$logins = $result2->num_rows;
+								$sql3 = "SELECT `time`, `ID_User`, `IP` FROM Login_Table WHERE `time` > '$week'";
+								$result3 = $db->query($sql3);
+								$logins = $result3->num_rows;
 								echo $logins;
 								$error = $db->error;
 							?>
@@ -123,20 +123,38 @@ $_SESSION["expire"] = $date + (60*60*24);
 						</td>
 						<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
 							<?php
-								while($result_array2 = $result2->fetch_assoc()){
-									$ip_address2 = $result_array2["IP"];
-									$id_user = $result_array2["ID_User"];
-									$sql3 = "SELECT `User_FullName` FROM Dim_User WHERE `ID_User` = '$id_user'";
-									$result3 = $agri_star_001->query($sql3);
-									$result_array3 = $result3->fetch_assoc();
-									$username = $result_array3["User_FullName"];
-									$unix_time2 = $result_array2["time"];
+								while($result_array3 = $result3->fetch_assoc()){
+									$ip_address2 = $result_array3["IP"];
+									$id_user1 = $result_array3["ID_User"];
+									$sql4 = "SELECT `User_FullName` FROM Dim_User WHERE `ID_User` = '$id_user1'";
+									$result4 = $agri_star_001->query($sql4);
+									$result_array4 = $result4->fetch_assoc();
+									$username = $result_array4["User_FullName"];
+									$unix_time2 = $result_array3["time"];
 									$iso_time2 = gmdate('Y-m-d\ H:i:s', $unix_time2);
 									echo nl2br("$ip_address2 → $username ($iso_time2) \n");
 								}
 							?>
 						</td>
 					</tr>
+					<tr>
+                                            <td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
+                                                Users logging in
+                                            </td>
+                                            <td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
+                                                <?php
+                                                    $sql5 = "SELECT `ID_User`,COUNT(`ID_User`) as `count` FROM Login_Table WHERE `time` > '$week' GROUP BY `ID_User`";
+                                                    $result5 = $db->query($sql5);
+                                                    while ($result_array5 = $result5->fetch_assoc()) {
+                                                        $user_amounts = $result_array5["count"];
+                                                        $id_user2 = $result_array5["ID_User"];
+                                                        $sql6 = "SELECT `User_FullName` FROM Dim_User WHERE `ID_User` = '$id_user2'";
+                                                        $result6 = $agri_star_001->query($sql6);
+							$result_array6 = $result6->fetch_assoc();
+							$username6 = $result_array6["User_FullName"];
+							echo nl2br("$username6 → $user_amounts \n");
+                                                    }
+                                                ?>
 				</table>
 			</div>
 			<div class="center_4">
@@ -148,8 +166,8 @@ $_SESSION["expire"] = $date + (60*60*24);
 						</td>
 						<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
 							<?php
-								$sql4 = "SELECT * FROM Failed_Login WHERE `time` > '$week'";
-								$failed_login = $db->query($sql4);
+								$sql7 = "SELECT * FROM Failed_Login WHERE `time` > '$week'";
+								$failed_login = $db->query($sql7);
 								$fails = $failed_login->num_rows;
 								echo $fails;
 							?>
