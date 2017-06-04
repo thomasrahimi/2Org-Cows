@@ -82,7 +82,7 @@ require_once './scripts/session-handler.php';
 						</tr>
 						<tr>
 							<td>Link to description</td>
-							<td><input type="text" name="description" placeholder="http://" required /></td>
+							<td><input type="text" name="description_link" placeholder="http://" required /></td>
 						</tr>
 						<tr>
 							<td>Vendor</td>
@@ -122,11 +122,10 @@ require_once './scripts/session-handler.php';
 					<th style="min-width:2vw; text-align:center; border:1px solid black; border-collapse:collapse;">Unit</th>
 					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Measurement Error</th>
 					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Vendor</th>
-					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Description Link</th>
 				</tr>
 				<?php
 				$group = intval($_SESSION["group"]);
-				$sql = "SELECT `Gage_LongName`,`Gage_ShortName`,`Unit`,`Measurement_Error`, `Vendor`, `Gage_Description_Text`, `Gage_Description_Link` FROM Dim_Gage WHERE `Group` = '$group'";
+				$sql = "SELECT `Gage_LongName`,`Gage_ShortName`,`Unit`,`Measurement_Error`, `Vendor`, `Vendor_Link`, `Gage_Description_Text`, `Gage_Description_Link` FROM Dim_Gage WHERE `Group` = '$group'";
 				$measurements = $agri_star_001->query($sql);
 				while($measurement_array = $measurements->fetch_assoc()) {
 				?>
@@ -134,14 +133,15 @@ require_once './scripts/session-handler.php';
 					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Gage_LongName'] ?></td>
 					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Unit'] ?></td>
 					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Measurement_Error'] ?></td>
-					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;"><?= $measurement_array['Vendor'] ?></td>
 					<td style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">
-						<a target="_blank" href="<?= $measurement_array['Gage_Description_Link'] ?>" ><?= $measurement_array['Gage_Description_Link'] ?></a>
-					</td>
+                                            <a target="_blank" href="<?= $measurement_array["Vendor_Link"] ?>" >
+                                                <?= $measurement_array['Vendor'] ?>
+                                            </a>
+                                        </td>
 				</tr>
 				<tr>
-                                    <td colspan="5" style="text-align:center; border:1px solid black; border-collapse:collapse;">
-                                        <?= $measurement_array['Gage_Description_Text'] ?>
+                                    <td colspan="4" style="text-align:center; border:1px solid black; border-collapse:collapse;">
+                                        <?= $measurement_array['Gage_Description_Text'] ?> - See also this <a target="_blank" href="<?= $measurement_array['Gage_Description_Link'] ?>">Link</a>
                                     </td>
                                 </tr>
 				<?php

@@ -8,14 +8,14 @@ unset($_SESSION["token"]);
 if(!empty($_POST["measurement_name"]) &&
 	$_POST["measurement_unit"] != " ") {
 		include_once "agri_star_001_connect.php";
-		$link1 = $agri_star_001->real_escape_string($_POST["description"]);
-		$link2 = $agri_star_001->real_escape_string($_POST["vendor_link"]);
-		if(filter_var($link1,FILTER_VALIDATE_URL) == null) {
+		$description_link = $agri_star_001->real_escape_string($_POST["description_link"]);
+		$vendor_link = $agri_star_001->real_escape_string($_POST["vendor_link"]);
+		if(filter_var($description_link,FILTER_VALIDATE_URL) == null) {
 			$var1 = "Your link for description doesn't seem to be legit";
 			header("Location:../measurement?val1=$var1");
 			exit();
 		}
-		if(filter_var($link2,FILTER_VALIDATE_URL) == null) {
+		if(filter_var($vendor_link,FILTER_VALIDATE_URL) == null) {
 			$var1 = "Your vendor link doesn't seem to be legit";
 			header("Location:../measurement?val1=$var1");
 			exit();
@@ -26,7 +26,6 @@ if(!empty($_POST["measurement_name"]) &&
 			$measurement_unit = $_POST["measurement_unit"];
 			$measurement_error = $agri_star_001->real_escape_string($_POST["measurement_error"]);
 			$vendor = $agri_star_001->real_escape_string($_POST["vendor"]);
-			$vendor_link = $agri_star_001->real_escape_string($_POST["vendor_link"]);
 			$user_id = intval($_SESSION["userid"]);
 			$description_text = $agri_star_001->real_escape_string($_POST["description_text"]);
 			
@@ -41,6 +40,7 @@ if(!empty($_POST["measurement_name"]) &&
 							`Unit`, 
 							`Measurement_Error`, 
 							`Vendor`,
+							`Vendor_Link`,
 							`Gage_Description_Text`,
 							`Gage_Description_Link`,
 							`Group`,
@@ -57,16 +57,18 @@ if(!empty($_POST["measurement_name"]) &&
 							?,
 							?,
 							?,
+							?,
 							?)";
 			$stmt2 = $agri_star_001->prepare($sql2);
-			$stmt2->bind_param("sssssssiiss",
+			$stmt2->bind_param("ssssssssiiss",
                                             $measurement_abbr,
                                             $measurement_name,
                                             $measurement_unit,
                                             $measurement_error,
                                             $vendor,
-                                            $description_text,
                                             $vendor_link,
+                                            $description_text,
+                                            $description_link,
                                             $group,
                                             $user_id,
                                             $email,
