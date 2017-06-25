@@ -23,6 +23,8 @@
 	else {
 		$cookies_state = "Please enable cookies, to use 2Org-Cows";
 	}
+	include_once './scripts/domain.php';
+	session_set_cookie_params($lifetime, '/', $domain, $secure = true, $httponly = true);
 	session_name("login");
 	session_start();
 	include_once "./scripts/logdb_connect.php";

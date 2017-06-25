@@ -81,7 +81,8 @@ if(hash_equals($_SESSION["token_session"], $_POST["token_form"])) {
 				$lifetime = (24*60*60);
 				$user_ip = $_SERVER["REMOTE_ADDR"];
 				session_destroy(); //destroy the old login session
-				session_set_cookie_params($lifetime, $secure = true, $httponly = true);//cookies looses validity after one day
+				include_once 'domain.php';
+				session_set_cookie_params($lifetime, '/', $domain, $secure = true, $httponly = true);//cookies looses validity after one day, is set to one single domain
 				session_name("2Org-Cows");
 				session_start(); //start the new session for database queries etc
 					$_SESSION["ip"] = $user_ip;
