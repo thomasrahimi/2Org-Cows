@@ -118,10 +118,10 @@ require_once './scripts/session-handler.php';
 			<h3>Measurement methods, created by your group</h3>
 				<table style="border:1px solid black; border-collapse:collapse;">
 				<tr>
-					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Measurement Method</th>
-					<th style="min-width:2vw; text-align:center; border:1px solid black; border-collapse:collapse;">Unit</th>
-					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Measurement Error</th>
-					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse;">Vendor</th>
+					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse; background-color:green;">Measurement Method</th>
+					<th style="min-width:2vw; text-align:center; border:1px solid black; border-collapse:collapse; background-color:green;">Unit</th>
+					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse; background-color:green;">Measurement Error</th>
+					<th style="min-width:3.5vw; text-align:center; border:1px solid black; border-collapse:collapse; background-color:green;">Vendor</th>
 				</tr>
 				<?php
 				$group = intval($_SESSION["group"]);
