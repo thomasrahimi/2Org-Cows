@@ -50,7 +50,7 @@ $user_role = $_SESSION["role"];
 			</a>
 		</div>
 		<div class="center">
-		<div class="center_head">
+		<div class="center_head" style="text-align:justify;">
 		Copyright (c) 2016, Universität Kassel <br>
 All rights reserved.<br>
 

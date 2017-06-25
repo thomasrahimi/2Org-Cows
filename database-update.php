@@ -47,12 +47,10 @@ include_once './scripts/check-session_restricted.php';
 		Accepted file types are:
                     <ul>
                         <li>*.csv</li>
-                        <li>*.xlsx</li>
-                        <li>*.xls</li>
-                        <li>*.ods</li>
                         <li>*.adis</li>
                         <li>*.txt</li>
                     </ul>
+                    To make Excel files appropriate for the database, please convert them to csv or txt
 			<form method="POST" enctype="multipart/form-data" action="./scripts/upload.php"> 
 			<table>
 			<tr>
@@ -64,22 +62,10 @@ include_once './scripts/check-session_restricted.php';
 			</tr>
 			</table>
 			Choose the file type
-			<table style="font-family:'Arial', 'Helvetica', 
-			sans-serif; font-weight:bold; font-size:2.5vh; line-height:3.5vh;border:1px solid black; 
-			border-collapse:collapse; padding-bottom:2vh; margin-top:4%; margin-bottom:4%;">
+			<table>
 			<tr>
-				<td style="min-width:10vw; text-align:center; border:1px solid black; border-collapse:collapse;">ADIS file</td>
-				<td style="min-width:10vw; text-align:center; border:1px solid black; border-collapse:collapse;">csv file</td>
-				<td style="min-width:10vw; text-align:center; border:1px solid black; border-collapse:collapse;">Excel file</td>
-			</tr>
-			<tr>
-				<td style="text-align:center; border:1px solid black; border-collapse:collapse;"><input type="radio" name="file_type" value="adis" /></td>
-				<td style="text-align:center; border:1px solid black; border-collapse:collapse;"><input type="radio" name="file_type" value="csv" /></td>
-				<td style="text-align:center; border:1px solid black; border-collapse:collapse;"><input type="radio" name="file_type" value="excel" /></td>
-			</tr>
-			<tr>
-                            <td style="text-align:center; border:1px solid black; border-collapse:collapse;">Select measurement procedure for this data</td>
-                            <td style="text-align:center; border:1px solid black; border-collapse:collapse;"><select name="choose-measurement">
+                            <td>Select measurement procedure for this data</td>
+                            <td><select name="choose-measurement">
                                 <?php
                                 include_once './scripts/agri_star_001_connect.php';
                                 $group = intval($_SESSION["group"]);
@@ -89,6 +75,7 @@ include_once './scripts/check-session_restricted.php';
                                     <option value="<?= $result_array["ID_Gage"] ?>"><?= $result_array["Gage_LongName"] ?></option>
                                 <?php 
                                 }
+                                $agri_star_001->close();
                                 ?>
                                 </select>
                             </td>

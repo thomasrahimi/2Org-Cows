@@ -256,6 +256,7 @@ top:0px;
 left:0px;
 height:3vh;
 font-size: 2.75vh;
+line-height:110%;
 width:100%;
 color:white;
 flex:1;
@@ -295,11 +296,12 @@ width:90vw;
 top:10%;
 left:2%;
 right:5%;
-bottom:4%;
+bottom:3.5%;
 color:black; 
 height: 15px;
 flex:1;
 margin-top: 20px;
+line-height:150%;
 }
 
 .text { /* for login.php*/
@@ -309,7 +311,8 @@ top:10%;
 left:2%;
 color:black; 
 flex:1;
-line-height:calc(13px + 1.6vh);
+line-height:150%;
+/*line-height:calc(13px + 1.6vh);*/
 }
 
 .login { /* for login.php*/
@@ -420,6 +423,7 @@ bottom:0;
 left:0;
 height:3.2vh;
 font-size: 2.75vh;
+line-height:110%;
 color:white;
 width:100%;
 flex:1;
