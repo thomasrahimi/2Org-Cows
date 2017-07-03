@@ -109,11 +109,18 @@ if(hash_equals($calc, $_POST["user_token"])) {
 				header("Location: ../admin?val8=$string8");
 				exit();
 			}
+                        if ($_SESSION["role"] < 4 && $user_role == 4) {
+                            $agri_star_001->close();
+                            $auth->close();
+                            $string9 = "You are not allowed to create users with admin permissions";
+                            header("Location: ../admin?val9=$string9");
+                            exit();
+                        }
 			if($_SESSION["role"] == 2 && $group_id != $_SESSION["group"]) {
 				$agri_star_001->close();
 				$auth->close();
-				$string9 = "You are not allowed to modify the group";
-				header("Location: ../admin?val9=$string9");
+				$string10 = "You are not allowed to modify the group";
+				header("Location: ../admin?val10=$string10");
 				exit();
 			}
 			else {
