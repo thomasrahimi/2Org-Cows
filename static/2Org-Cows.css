@@ -14,7 +14,7 @@ word-wrap:break-word;
 top:0px; 
 left:0px;
 line-height:3vh;
--webkit-touch-callout: none;
+-webkit-touch-callout: none; //prevents unattended selection by mouseclick
 -webkit-user-select: none;
 -khtml-user-select: none;
 -moz-user-select: none;
@@ -284,9 +284,29 @@ padding: 12px 16px;
 z-index: 2;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content { 
 display: block;
 cursor: pointer;
+}
+
+.imprint { /*creates dropdown for imprint */
+    position:relative;
+    display:inline-block;
+    cursor:pointer;
+    background-color:green;
+}
+
+.imprint-content {
+    display:none;
+    position:absolute;
+    min-width:100%;
+    z-index:2;
+    background-color:green;
+}
+
+.imprint:hover .imprint-content {
+    display:block;
+    cursor:pointer;
 }
 
 .center {

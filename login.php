@@ -73,7 +73,17 @@
 				<a target="_blank" href="http://coreorganicplus.org/research-projects/2-org-cows/">site</a> or 
 				in this <a target="_blank" href="./static/Faerdig_2-Org-Cows.pdf">sheet</a>. The scientific paper, 
 				regarding the database, can be found 
-				<a target="_blank" href="http://orgprints.org/view/projects/2orgcows.html">here</a>.
+				<a target="_blank" href="http://orgprints.org/view/projects/2orgcows.html">here</a>.</br>
+                                <div class="imprint">
+                                    <span>Imprint</span>
+                                    <div class="imprint-content">
+                                        <p>FG Agrartechnik</p>
+                                        <p>Nordbahnhofstraße 1a</p>
+                                        <p>D-37213 Witzenhausen</p>
+                                        <p>Germany</p>
+                                    </div>
+                                </div>
+                                
 			</article>
 			</div>
 			<div class="center_2">
