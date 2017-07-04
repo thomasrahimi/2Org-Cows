@@ -40,7 +40,7 @@ $user_role = $_SESSION["role"];
 		</div>
 	</div>
 	<div class="logo">
-	<a href="../search.php">
+	<a href="../home">
 		<picture>
 		<source srcset="../static/Logo-2Org-Cows.png" media="(min-width: 800px)">
 		<source srcset="../static/Logo-2Org-Cows64.png">
