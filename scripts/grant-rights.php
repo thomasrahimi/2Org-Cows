@@ -62,7 +62,9 @@ if(hash_equals($calc, $_POST["grant_token"])) {
 		header("Location:../admin?val1=$var1");
 		exit();
 	} else {
-		echo "error";
+		$var3 = "No group chosen to get access";
+		header("Location:../admin?val3=$var3");
+		exit();
 	}
 } else {
 	$var2 = "Session terminated due to security concerns";
