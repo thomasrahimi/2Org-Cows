@@ -16,7 +16,7 @@ if(hash_equals($calc, $_POST["grant_token"])) {
 		$giving_group = intval($_SESSION["group"]);
 		foreach($_POST["access"] as $group){
 			$group = intval($group);
-			$sql1 = "SELECT * FROM grants WHERE `giving_group` = ? AND `receiving_group` = ?";
+			$sql1 = "SELECT * FROM grants WHERE `giving_group` = ? AND `receiving_group` = ?"; # check, if the connection between the groups already exists
 			$stmt1 = $agri_star_001->prepare($sql1);
 			$stmt1->bind_param('ii',$giving_group,$group);
 			$stmt1->execute();
@@ -24,12 +24,12 @@ if(hash_equals($calc, $_POST["grant_token"])) {
 			$num_rows = $stmt1_result->num_rows;
 			$stmt_array = $stmt1_result->fetch_assoc();
 			$access = intval($stmt_array["access"]);
-			if($num_rows == 0) {
+			if($num_rows == 0) { # if the connection between the groups does not exist yet, a new set is created
 				$sql2 = "INSERT INTO grants (`giving_group`, `receiving_group`, `access`) VALUES (?,?, 1)";
 				$stmt2 = $agri_star_001->prepare($sql2);
 				$stmt2->bind_param('ii',$giving_group,$group);
 				$stmt2->execute();
-			} elseif($access != 1) {
+			} elseif($access != 1) { # if the connection between the groups exists, but is not yet 1, the corresponding column is updated
 					$sql3 = "UPDATE grants SET `access` = 1 WHERE `giving_group` = ? AND `receiving_group` = ?";
 					$stmt3 = $agri_star_001->prepare($sql3);
 					$stmt3->bind_param('ii',$giving_group,$group);
@@ -45,7 +45,7 @@ if(hash_equals($calc, $_POST["grant_token"])) {
                     foreach ($_POST["access"] as $group){
                         $receiving_group = $stmt2_array["receiving_group"];
                         $check_array = in_array($receiving_group,$_POST["access"]);
-                        if ($check_array === false) {
+                        if ($check_array === false) { # if the submitted array has a 0 for one group in it, the corresponding connection is updated to 0
                             $sql3 = "UPDATE grants SET `access`= 0 WHERE `giving_group` = ? AND `receiving_group` = ?";
                             $stmt3 = $agri_star_001->prepare($sql3);
                             $stmt3->bind_param('ii', $giving_group, $receiving_group);

@@ -32,9 +32,8 @@ if(hash_equals($_SESSION["token_session"], $_POST["token_form"])) {
 			exit();
 		}
 		else{
-		$time = date("U");
-		$check_time = $time - 10*60;
-		$sql1 = "SELECT * FROM Failed_Login WHERE `username` = ? AND `time` > ?";
+		$check_time = date("U") - 10*60;
+		$sql1 = "SELECT * FROM Failed_Login WHERE `username` = ? AND `time` > ?"; # this checks for the last logins within the time period 10 prior to nowa login. As the required time of 10 minutes prior to login_script execution is already calculated, the larger than parameter is chosen, to check for bruteforce attacks 
 		$stmt1 = $db->prepare($sql1);
 		$stmt1->bind_param('si',$username,$check_time);
 		$stmt1->execute();
