@@ -11,6 +11,7 @@ include_once './scripts/check-session_restricted.php';
 	<link rel="shortcut icon" type="image" href="./static/Favicon-2Org-Cows.ico" />
 	<title>Update database</title>
 </head>
+<body>
 <div class="page">
 <div class="text a">
 	<header class="header">
@@ -166,4 +167,5 @@ include_once './scripts/check-session_restricted.php';
 	</footer>
 </div>
 </div>
+</body>
 </html>
