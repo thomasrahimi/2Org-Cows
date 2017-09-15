@@ -71,11 +71,10 @@ include_once './scripts/check-session_restricted.php';
                                 $group = intval($_SESSION["group"]);
                                 $sql1 = "SELECT `ID_Gage`, `Gage_LongName` FROM Dim_Gage WHERE `Group` = '$group'";
                                 $stmt1 = $agri_star_001->query($sql1);
-                                while ($result_array = $stmt1->fetch_assoc()) { ?>
-                                    <option value="<?= $result_array["ID_Gage"] ?>"><?= $result_array["Gage_LongName"] ?></option>
+                                while ($result_array1 = $stmt1->fetch_assoc()) { ?>
+                                    <option value="<?= $result_array1["ID_Gage"] ?>"><?= $result_array1["Gage_LongName"] ?></option>
                                 <?php 
                                 }
-                                $agri_star_001->close();
                                 ?>
                                 </select>
                             </td>
@@ -109,6 +108,22 @@ include_once './scripts/check-session_restricted.php';
 						<td>Password</td>
 						<td><input type="password" name="smaxtec_password" required /></td>
 					</tr>
+					<tr>
+						<td>Select farm</td>
+						<td>
+							<select name="smaxtec_farm">
+								<?php
+									$sql2 = "SELECT `ID_Farm`,`Farm_NameLong` FROM Dim_Farm WHERE `ID_Group`=$group";
+									$stmt2 = $agri_star_001->query($sql2);
+									while ($result_array2 = $stmt2->fetch_assoc()){
+								?>
+								<option value="<?= $result_array2["ID_Farm"] ?>"><?= $result_array2["Farm_NameLong"] ?></option>
+								<?php
+								}
+								?>
+							</select>
+						</td>
+					</tr>
 				</table>
 				<?php 
 					$_SESSION["smaxtec_token"] = uniqid();
@@ -116,6 +131,32 @@ include_once './scripts/check-session_restricted.php';
 				<input type="hidden" name="smaxtec_token" value="<?= hash_hmac("sha256", "smaxtec_connect", $_SESSION["smaxtec_token"]) ?>" />
 				<input type="submit" name="smaxtec_connect" value="connect to smaXtec" formaction="./scripts/smaxtec.php" />
 			</form>
+	<table>
+		<tr>
+			<td>Already selected farms for synchronization:</td>
+			<td>
+		</tr>
+		<tr>
+		<td>
+		<?php
+			include_once './scripts/credentials_connect.php';
+			$sql3 = "SELECT `ID_Farm` FROM credentials WHERE `ID_Group`=$group";
+			$stmt3 = $credentials->query($sql3);
+			while ($result_array3 = $stmt3->fetch_assoc()){
+				$id_farm = $result_array3["ID_Farm"];
+				$sql4 = "SELECT `Farm_NameLong` FROM Dim_Farm WHERE `ID_Farm`=$id_farm";
+				$stmt4 = $agri_star_001->query($sql4);
+				while ($result_array4 = $stmt4->fetch_assoc()){
+					$farm = $result_array4['Farm_NameLong'];
+					echo nl2br("$farm \n");
+				}
+			$credentials->close();
+			$agri_star_001->close();
+			}
+		?>
+			</td>
+		</tr>
+	</table>
 	<?php
 		}
 	?>
