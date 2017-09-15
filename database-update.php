@@ -82,9 +82,9 @@ include_once './scripts/check-session_restricted.php';
                         </tr>
 			</table>
 			<?php //this part is for CSRF protection
-				$_SESSION["upload_token"] = bin2hex(random_bytes(32));
+				$_SESSION["upload_token"] = uniqid();
 			?>
-			<input type="hidden" name="upload_token" value="<?= $_SESSION["upload_token"] ?>" />
+			<input type="hidden" name="upload_token" value="<?= hash_hmac('sha256', 'upload_file', $_SESSION["upload_token"]) ?>" />
 			<input type="submit" name="upload" value="upload file" formaction="./scripts/upload.php"/>
 			</form></br>
 			<?php
@@ -93,6 +93,32 @@ include_once './scripts/check-session_restricted.php';
 			}
 			?>
 		</div>
+	</div>
+	<div class="center_2">
+	<?php
+		if ($user_role > 1) { 
+			?>
+			<h3>smaXtec access</h3>
+			<form method="POST" action="./scripts/smaxtec.php">
+				<table>
+					<tr>
+						<td>E-Mail</td>
+						<td><input type="email" name="smaxtec_email" required /></td>
+					</tr>
+					<tr>
+						<td>Password</td>
+						<td><input type="password" name="smaxtec_password" required /></td>
+					</tr>
+				</table>
+				<?php 
+					$_SESSION["smaxtec_token"] = uniqid();
+				?>
+				<input type="hidden" name="smaxtec_token" value="<?= hash_hmac("sha256", "smaxtec_connect", $_SESSION["smaxtec_token"]) ?>" />
+				<input type="submit" name="smaxtec_connect" value="connect to smaXtec" formaction="./scripts/smaxtec.php" />
+			</form>
+	<?php
+		}
+	?>
 	</div>
 	<footer class="footer">
 		This page was developed for the 2-Org-Cows project and underlies the <a href="./license" style="color:white;">BSD-license</a>

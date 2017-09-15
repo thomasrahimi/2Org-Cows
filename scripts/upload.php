@@ -2,7 +2,8 @@
 require_once 'session-handler.php';
 session_name("2Org-Cows");
 session_start();
-if(hash_equals($_POST["upload_token"], $_SESSION["upload_token"])) {
+$calc = hash_hmac('sha256','upload_file',$_SESSION["upload_token"]);
+if(hash_equals($calc, $_POST["upload_token"])) {
 	unset($_SESSION["upload_token"]);
 	if (isset($_FILES["data_files"]) && $_FILES["data_files"]["size"] > 0) { # http://www.php-mysql-tutorial.com/wikis/mysql-tutorials/uploading-files-to-mysql-database.aspx, https://bytes.com/topic/php/insights/740327-uploading-files-into-mysql-database-using-php
             if ($_FILES["data_files"]["error"] == 0) {
